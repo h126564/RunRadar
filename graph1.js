@@ -1,4 +1,5 @@
 function graph1(p) {
+  colorMode(RGB)
     p.setup = function () {
       p.createCanvas(window.innerWidth, 200);
       p.background(color("#212121"));
