@@ -1,6 +1,6 @@
 function graph1(p) {
     p.setup = function () {
-      p.createCanvas(720, 200);
+      p.createCanvas(window.innerWidth-100, 200);
       p.background(0);
     };
     p.draw = function () {
