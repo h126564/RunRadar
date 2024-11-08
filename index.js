@@ -7,4 +7,4 @@ function graph1(p) {
       p.circle(p.mouseX, p.mouseY, 50);
     };
   };
-  new p5(sketch1);
+  new p5(graph1);
