@@ -17,12 +17,13 @@ header{
     color:#4a4a4a
 }
 nav{
-    position:absolute;
+    top:0;
     float:right;
     line-height: 10%;
 }
 nav a{
     padding: 36px 10px;
+    text-decoration: none;
     font-size: 20;
     letter-spacing: 4px;
     margin: 0 1px;
