@@ -17,7 +17,7 @@ header{
     color:#4a4a4a
 }
 nav{
-    top:0;
+    top: -50px;;
     float:right;
     line-height: 10%;
 }
