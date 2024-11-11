@@ -14,4 +14,18 @@ header{
     height: 10%;
     background-color: #eeeeee;
     position:absolute;
+    color:#4a4a4a
+}
+nav{
+    float:right;
+    line-height: 10%;
+}
+nav a{
+    padding: 36px 10px;
+    font-size: 20;
+    letter-spacing: 4px;
+    margin: 0 1px;
+}
+nav a:hover{
+    color:#212121;
 }
