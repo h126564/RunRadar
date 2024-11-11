@@ -4,9 +4,12 @@ body{
 }
 
 #Banner{
-    margin:0;
-    padding:0;
+    margin:0 auto;
+    width: 90%;
+}
+header{
     width: 100%;
     height: 10%;
     background-color: #eeeeee;
+    position:absolute;
 }
