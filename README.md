@@ -7,3 +7,5 @@ Pagina3: Wanneer is het beste hardloopweer? Dmv van een 2.5-daagse forecast best
 
 api site https://open-meteo.com/en/docs
 api call temperatuur: https://api.open-meteo.com/v1/forecast?latitude=51.834693582810125&longitude=4.12083064600806&hourly=temperature_2m
+APi call openweatherforecast: https://api.openweathermap.org/data/2.5/forecast?lat=51.826&lon=4.118&appid=c147b5c83a42fbf37236c537fb83e881
+API call openweatherlive: https://api.openweathermap.org/data/2.5/weather?lat=51.826&lon=4.118&appid=c147b5c83a42fbf37236c537fb83e881
