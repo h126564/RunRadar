@@ -43,8 +43,10 @@ nav a:hover{
     right:-40%
 }
 #locationfield{
+    padding:8px;
     border: 2px solid #474747;
     border-radius: 50px;
     background-color: #474747;
     color: #AAAAAA
+    
 }
