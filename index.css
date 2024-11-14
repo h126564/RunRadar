@@ -41,3 +41,9 @@ nav a:hover{
     float:right;
     line-height: 10%;
 }
+#locationfield{
+    border: 2px solid #474747;
+    border-radius: 50px;
+    background-color: #474747;
+    color: #AAAAAA
+}
