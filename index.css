@@ -19,10 +19,10 @@ header{
 nav{
     
     position: relative;
-    top: -42px;;
+    top: -42px;
     float:right;
     line-height: 10%;
-    right:10%;
+    right:20%;
 }
 nav a{
     padding: 36px 10px;
@@ -34,4 +34,10 @@ nav a{
 }
 nav a:hover{
     color:#212121;
+}
+#searchDiv{
+    position: relative;
+    top: -42px;
+    float:right;
+    line-height: 10%;
 }
