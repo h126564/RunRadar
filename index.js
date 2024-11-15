@@ -20,7 +20,7 @@ searchButton.onclick = function(){
     })
     .then(data => {
         console.log(data);
-        apiResponse=data;
+        apiResponse=data[0];
         storageObject.lat = data.lat;
         storageObject.long = data.lon;
     })
