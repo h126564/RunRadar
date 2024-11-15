@@ -5,7 +5,7 @@ function graph2(p) {
     p.background(p.color("#212121"));
   };
   p.draw = function () {
-    console.log(storageObject.long + ", " + storageObject.lat);
+    console.log(storageObject.locationData.long + ", " + storageObject.locationData.lat);
     p.circle(p.mouseX, p.mouseY, 50);
   };
 };
