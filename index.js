@@ -1,3 +1,7 @@
+let storageObject = {
+    long: 0, 
+    lat: 0
+};
 const input = document.getElementById("locationfield");
 const searchButton = document.getElementById("searchButton");
 let apiResponse = {};
@@ -17,6 +21,8 @@ searchButton.onclick = function(){
     .then(data => {
         console.log(data);
         apiResponse=data;
+        storageObject.lat = data.lat;
+        storageObject.long = data.lon;
     })
     .catch(error => {
         console.error('Error:', error);
