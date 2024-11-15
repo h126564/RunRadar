@@ -1,7 +1,7 @@
 let storageObject = {
     long: 0, 
     lat: 0,
-    weatherAPIData,
+    weatherAPIData: {},
 };
 const input = document.getElementById("locationfield");
 const searchButton = document.getElementById("searchButton");
