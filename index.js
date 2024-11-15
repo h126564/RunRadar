@@ -1,6 +1,7 @@
 let storageObject = {
     long: 0, 
-    lat: 0
+    lat: 0,
+    weatherAPIData,
 };
 const input = document.getElementById("locationfield");
 const searchButton = document.getElementById("searchButton");
@@ -21,6 +22,7 @@ searchButton.onclick = function(){
     .then(data => {
         console.log(data);
         apiResponse=data[0];
+        console.log(apiResponse)
         storageObject.lat = data.lat;
         storageObject.long = data.lon;
     })
