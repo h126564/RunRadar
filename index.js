@@ -20,11 +20,10 @@ searchButton.onclick = function(){
         return response.json();
     })
     .then(data => {
-        console.log(data);
         apiResponse=data[0];
         console.log(apiResponse)
-        storageObject.lat = data.lat;
-        storageObject.long = data.lon;
+        storageObject.lat = apiResponse.lat;
+        storageObject.long = apiResponse.lon;
     })
     .catch(error => {
         console.error('Error:', error);
