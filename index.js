@@ -48,6 +48,8 @@ function updateWeatherData(){
         return response.json();
     })
     .then(data => {
+        console.log("openmeteo data");
         console.log(data);
+        
     })
 }
