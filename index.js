@@ -19,6 +19,10 @@ searchButton.onclick = function(){
         return response.json();
     })
     .then(data => {
+        if(data.length == 0){
+            alert("Locatie niet gevonden");
+            throw new Error('Parameter is not a location!');
+        }
         apiResponse=data[0];
         console.log(apiResponse)
         storageObject.locationData.lat = apiResponse.lat;
