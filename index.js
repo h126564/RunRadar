@@ -27,6 +27,7 @@ searchButton.onclick = function(){
         console.log(apiResponse)
         storageObject.locationData.lat = apiResponse.lat;
         storageObject.locationData.long = apiResponse.lon;
+        updateWeatherData();
     })
     .catch(error => {
         console.error('Error:', error);
