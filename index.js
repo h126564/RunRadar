@@ -42,6 +42,8 @@ function updateWeatherData(){
     }
     //make open meteo calls
     const openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + storageObject.locationData.lat + '&longitude='+ storageObject.locationData.lon + '&hourly=relative_humidity_2m,surface_pressure&daily=sunrise,sunset&timezone=auto';
+    console.log(openMeteoApiUrl)
+    console.log("Api wordt gecalled")
     fetch(openMeteoApiUrl).then(response=> {
         if(!response.ok){
             throw new Error('Openmeteo niet te bereiken')
