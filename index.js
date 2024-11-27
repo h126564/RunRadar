@@ -3,7 +3,7 @@ let storageObject = {
         lat: 0,
         lon: 0,
     },
-    weatherAPIData: {},
+    MeteoweatherAPIData: {},
 };
 const input = document.getElementById("locationfield");
 const searchButton = document.getElementById("searchButton");
@@ -56,6 +56,7 @@ function updateWeatherData(){
     .then(data => {
         console.log("openmeteo data");
         console.log(data);
-        
+        storageObject.MeteoweatherAPIData = data;
+        console.log(data.hourly.surface_pressure[1])
     })
 }
