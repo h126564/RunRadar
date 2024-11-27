@@ -51,10 +51,7 @@ function updateWeatherData(){
         return response.json();
     })
     .then(data => {
-        console.log("openmeteo data");
-        console.log(data);
         storageObject.MeteoweatherAPIData = data;
-        console.log(data.hourly.surface_pressure[1])
     })
 
 
