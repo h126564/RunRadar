@@ -4,6 +4,8 @@ let storageObject = {
         lon: 0,
     },
     MeteoweatherAPIData: {},
+    OpenWeatherAPIData: {},
+
 };
 const input = document.getElementById("locationfield");
 const searchButton = document.getElementById("searchButton");
@@ -54,7 +56,17 @@ function updateWeatherData(){
         storageObject.MeteoweatherAPIData = data;
     })
 
-
+    const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + storageObject.locationData.lat + '&lon='+ storageObject.locationData.lon + '&appid=c147b5c83a42fbf37236c537fb83e881';
+    fetch(openWeatherApiUrl).then(response=> {
+        if(!response.ok){
+            throw new Error('Openmeteo niet te bereiken')
+        }
+        return response.json();
+    })
+    .then(data => {
+        storageObject.OpenWeatherAPIData = data;
+        console.log(storageObject.OpenWeatherAPIData)
+    })
 
 
 }
