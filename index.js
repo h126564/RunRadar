@@ -27,7 +27,6 @@ searchButton.onclick = function(){
             throw new Error('Parameter is not a location!');
         }
         apiResponse=data[0];
-        console.log(apiResponse)
         storageObject.locationData.lat = apiResponse.lat;
         storageObject.locationData.lon = apiResponse.lon;
         updateWeatherData();
@@ -45,8 +44,6 @@ function updateWeatherData(){
     }
     //make open meteo calls
     const openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + storageObject.locationData.lat + '&longitude='+ storageObject.locationData.lon + '&hourly=relative_humidity_2m,surface_pressure&daily=sunrise,sunset&timezone=auto';
-    console.log(openMeteoApiUrl)
-    console.log("Api wordt gecalled")
     fetch(openMeteoApiUrl).then(response=> {
         if(!response.ok){
             throw new Error('Openmeteo niet te bereiken')
@@ -59,4 +56,8 @@ function updateWeatherData(){
         storageObject.MeteoweatherAPIData = data;
         console.log(data.hourly.surface_pressure[1])
     })
+
+
+
+
 }
