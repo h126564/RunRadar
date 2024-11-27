@@ -37,7 +37,7 @@ searchButton.onclick = function(){
 
 
 function updateWeatherData(){
-    if(storageObject.locationData.keys.length == 0){
+    if(Object.keys(storageObject.locationData).length === 0){
         throw new Error('No location data stored');
     }
     //make open meteo calls
