@@ -38,6 +38,8 @@ function pagina2(p) {
   }
 
   function weeroproute() {
+    p.push()
+    p.translate(0, -30); 
     p.fill("#393E46");
     p.rect(50, 500, 1800, 400, 50);
 
@@ -77,6 +79,7 @@ function pagina2(p) {
     }
 
     p.textAlign(p.LEFT);
+    p.pop()
   }
 
   function updateData() {
