@@ -78,7 +78,7 @@ function pagina2(p) {
   let windrichting;
 
   p.setup = function() {
-    p.createCanvas(1890, 962);
+    p.createCanvas(1890, 940);
     p.background("#222831");
     updateData();
   }
