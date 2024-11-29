@@ -10,7 +10,6 @@ let windrichting;
 let windsnelheid = 21;
 
   p.setup = function() {
-    p.translate(0, p.height * 0.1);
     p.createCanvas(1900, 972);
     p.background("#222831");
     updateData();
@@ -26,6 +25,7 @@ let windsnelheid = 21;
   }
 
   p.draw = function() {
+    p.translate(0, p.height * 0.1);
     peruur();
     weervandaag();
     tweedaagse();
