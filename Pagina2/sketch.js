@@ -1,3 +1,75 @@
+let storageObject = {
+  locationData: {
+      lat: 0,
+      lon: 0,
+  },
+  MeteoweatherAPIData: {},
+  OpenWeatherAPIData: {},
+
+};
+let apiResponse = {};
+function updateLocation(){
+  // Define the API URL
+  
+  const apiUrl = 'https://geocode.maps.co/search?q=' +  "helinium"  + '&api_key=67346201ecee5360511634fte9d92c5';
+
+  // Make a GET request
+  fetch(apiUrl)
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return response.json();
+  })
+  .then(data => {
+      if(data.length == 0){
+          alert("Locatie niet gevonden");
+          throw new Error('Parameter is not a location!');
+      }
+      apiResponse=data[0];
+      storageObject.locationData.lat = apiResponse.lat;
+      storageObject.locationData.lon = apiResponse.lon;
+      updateWeatherData(storageObject.locationData.lon, storageObject.locationData.lat);
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+
+};
+
+
+
+function updateWeatherData(lon, lat ){
+  if(Object.keys(storageObject.locationData).length === 0){
+      throw new Error('No location data stored');
+  }
+  //make open meteo calls
+  const openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude='+ lon + '&hourly=relative_humidity_2m,surface_pressure&daily=sunrise,sunset&timezone=auto';
+  fetch(openMeteoApiUrl).then(response=> {
+      if(!response.ok){
+          throw new Error('Openmeteo niet te bereiken')
+      }
+      return response.json();
+  })
+  .then(data => {
+      storageObject.MeteoweatherAPIData = data;
+  })
+
+  const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=c147b5c83a42fbf37236c537fb83e881';
+  fetch(openWeatherApiUrl).then(response=> {
+      if(!response.ok){
+          throw new Error('Openmeteo niet te bereiken')
+      }
+      return response.json();
+  })
+  .then(data => {
+      storageObject.OpenWeatherAPIData = data;
+      console.log(storageObject.OpenWeatherAPIData)
+  })
+
+
+}
+
 function pagina2(p) {
   let icons = [];
   let temperature = 6;
@@ -10,7 +82,9 @@ function pagina2(p) {
     p.background("#222831");
     updateData();
   }
-
+  p.mousePressed = function(){
+    updateLocation();
+  }
   p.preload = function() {
     windrichting = p.loadImage("Pagina2/direction.png");
   }
