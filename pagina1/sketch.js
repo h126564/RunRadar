@@ -25,7 +25,7 @@ let windsnelheid = 21;
   }
 
   p.draw = function() {
-    p.translate(0, p.height * 0.1);
+    p.translate(0, p.height * 0.05);
     peruur();
     weervandaag();
     tweedaagse();
