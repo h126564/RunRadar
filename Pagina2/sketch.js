@@ -92,7 +92,6 @@ function updateWeatherData(lon, lat ){
 
 function pagina2(p) {
   let icons = [];
-  let temperature = 6;
   let windgraden = 230;
   let windsnelheid = 21;
   let windrichting;
@@ -159,7 +158,7 @@ function pagina2(p) {
       p.fill("white");
       p.textSize(30);
       p.text(formattedTime, x + 48, 650);
-      p.text(`${storageObject.Meteo15MinuteData.minutely_15.temperature_2m[i]}°C`, x + 48, 735);
+      p.text(`${Math.round(storageObject.Meteo15MinuteData.minutely_15.temperature_2m[i])}°C`, x + 48, 735);
       p.textSize(25);
       p.text(`${windsnelheid} km/h`, x + 48, 840);
       p.image(icons[i], x + 5, 635, 90, 90);
