@@ -10,7 +10,7 @@ function pagina3(p) {
   }
 
   p.preload = function() {
-    windrichting = p.loadImage("direction.png");
+    windrichting = p.loadImage("Pagina3/direction.png");
   }
 
   p.mousePressed = function() {
