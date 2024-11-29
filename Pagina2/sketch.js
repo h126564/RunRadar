@@ -1,4 +1,5 @@
 let storageObject = {
+  hasUpdated: false,
   locationData: {
       lat: 0,
       lon: 0,
@@ -82,7 +83,7 @@ function updateWeatherData(lon, lat ){
       console.log(storageObject.OpenWeatherAPIData)
   })
 
-
+  storageObject.hasUpdated = true;
 }
 
 function pagina2(p) {
@@ -141,6 +142,10 @@ function pagina2(p) {
     p.fill("#222831");
 
     for (let i = 0; i < 13; i++) {
+      if(!storageObject.hasUpdated){
+        p.pop()
+        return;
+      }
       let x = 116 + i * 130;
       let hours = currentTime.getHours();
       let minutes = currentTime.getMinutes();
