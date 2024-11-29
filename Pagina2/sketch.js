@@ -16,7 +16,7 @@ function pagina2(p) {
   }
 
   p.draw = function() {
-    p.translate(0, p.height * 0.05); // Translate the entire canvas 10% down
+    p.translate(0, p.height * 0.02); 
     zoekscherm();
     kaart();
     weeroproute();
