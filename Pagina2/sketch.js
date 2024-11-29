@@ -13,7 +13,7 @@ let apiResponse = {};
 function updateLocation(){
   // Define the API URL
   
-  const apiUrl = 'https://geocode.maps.co/search?q=' +  "helinium"  + '&api_key=67346201ecee5360511634fte9d92c5';
+  const apiUrl = 'https://geocode.maps.co/search?q=' +  "Egypt"  + '&api_key=67346201ecee5360511634fte9d92c5';
 
   // Make a GET request
   fetch(apiUrl)
