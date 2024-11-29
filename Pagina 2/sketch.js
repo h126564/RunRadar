@@ -1,3 +1,4 @@
+function pagina2(p){
 let icons = [];
 let temperature = 6;
 let windgraden = 230;
@@ -98,3 +99,5 @@ function roundedTime() {
   now.setMinutes(roundedMinutes, 0, 0);
   return now;
 }
+}
+new p5(pagina2)

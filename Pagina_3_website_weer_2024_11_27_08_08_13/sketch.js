@@ -1,4 +1,4 @@
-function pagina2(p){
+function pagina3(p){
 let icons;
 let temperature = 6;
 let windsnelheid = 21;
@@ -66,4 +66,4 @@ function updateData() {
   windgraden = 30;
 }
 }
-new p5(pagina2)
+new p5(pagina3)
