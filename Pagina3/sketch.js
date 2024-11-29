@@ -13,10 +13,6 @@ function pagina3(p) {
     windrichting = p.loadImage("Pagina3/direction.png");
   }
 
-  p.mousePressed = function() {
-    p.fullscreen(true);
-  }
-
   p.draw = function() {
     zoekscherm();
     kaart();

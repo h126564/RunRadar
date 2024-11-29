@@ -15,11 +15,8 @@ function pagina2(p) {
     windrichting = p.loadImage("Pagina2/direction.png");
   }
 
-  p.mousePressed = function() {
-    p.fullscreen(true);
-  }
-
   p.draw = function() {
+    p.translate(0, p.height * 0.1); // Translate the entire canvas 10% down
     zoekscherm();
     kaart();
     weeroproute();
