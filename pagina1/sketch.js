@@ -16,6 +16,7 @@ let windsnelheid = 21;
   }
 
   p.preload = function() {
+    p.translate(0, p.height * 0.1);
     windrichting = p.loadImage("pagina1/direction.png");
     clouds = p.loadImage("pagina1/clouds.jpg");
     sunset = p.loadImage("pagina1/sunset.png");
