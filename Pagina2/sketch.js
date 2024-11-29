@@ -3,9 +3,10 @@ let storageObject = {
       lat: 0,
       lon: 0,
   },
+  Meteo15MinuteData: {},
   MeteoweatherAPIData: {},
   OpenWeatherAPIData: {},
-
+  
 };
 let apiResponse = {};
 function updateLocation(){
@@ -53,7 +54,21 @@ function updateWeatherData(lon, lat ){
   })
   .then(data => {
       storageObject.MeteoweatherAPIData = data;
+      console.log(storageObject.MeteoweatherAPIData)
   })
+  const openMeteo15ApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude='+ lon + '&minutely_15=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&forecast_minutely_15=24';
+  fetch(openMeteo15ApiUrl).then(response=> {
+      if(!response.ok){
+          throw new Error('Openmeteo niet te bereiken')
+      }
+      return response.json();
+  })
+  .then(data => {
+      storageObject.Meteo15MinuteData = data;
+      console.log(storageObject.Meteo15MinuteData)
+  })
+
+  
 
   const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=c147b5c83a42fbf37236c537fb83e881';
   fetch(openWeatherApiUrl).then(response=> {
