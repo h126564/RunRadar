@@ -1,8 +1,8 @@
 
 
 function pagina1(p) {
-  let icons2;
-  let icons = [];
+let icons2;
+let icons = [];
 let temperature = 6;
 let temperaturefeelslike = 2;
 let windgraden = 30;
