@@ -10,13 +10,13 @@ let windrichting;
 let windsnelheid = 21;
 
   p.setup = function() {
+    p.translate(0, p.height * 0.1);
     p.createCanvas(1900, 972);
     p.background("#222831");
     updateData();
   }
 
   p.preload = function() {
-    p.translate(0, p.height * 0.1);
     windrichting = p.loadImage("pagina1/direction.png");
     clouds = p.loadImage("pagina1/clouds.jpg");
     sunset = p.loadImage("pagina1/sunset.png");
