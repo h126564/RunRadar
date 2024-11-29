@@ -4,7 +4,7 @@ function pagina3(p) {
   let windsnelheid = 21;
 
   p.setup = function() {
-    p.createCanvas(1900, 972);
+    p.createCanvas(1890, 972);
     p.background("#222831");
     updateData();
   }

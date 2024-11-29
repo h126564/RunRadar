@@ -6,7 +6,7 @@ function pagina2(p) {
   let windrichting;
 
   p.setup = function() {
-    p.createCanvas(1900, 972);
+    p.createCanvas(1890, 972);
     p.background("#222831");
     updateData();
   }
@@ -16,7 +16,7 @@ function pagina2(p) {
   }
 
   p.draw = function() {
-    p.translate(0, p.height * 0.1); // Translate the entire canvas 10% down
+    p.translate(0, p.height * 0.09); // Translate the entire canvas 10% down
     zoekscherm();
     kaart();
     weeroproute();
