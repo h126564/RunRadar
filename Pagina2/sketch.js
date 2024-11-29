@@ -160,7 +160,7 @@ function pagina2(p) {
       p.text(formattedTime, x + 48, 650);
       p.text(`${Math.round(storageObject.Meteo15MinuteData.minutely_15.temperature_2m[i])}°C`, x + 48, 735);
       p.textSize(25);
-      p.text(`${storageObject.Meteo15MinuteData.minutely_15.wind_speed_10m[i]} km/h`, x + 48, 840);
+      p.text(`${Math.round(storageObject.Meteo15MinuteData.minutely_15.wind_speed_10m[i])} km/h`, x + 48, 840);
       p.image(icons[i], x + 5, 635, 90, 90);
 
       p.push();
