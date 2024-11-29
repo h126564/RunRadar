@@ -46,6 +46,7 @@ function updateWeatherData(lon, lat ){
       throw new Error('No location data stored');
   }
   //make open meteo calls
+  /*
   const openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude='+ lon + '&hourly=relative_humidity_2m,surface_pressure&daily=sunrise,sunset&timezone=auto';
   fetch(openMeteoApiUrl).then(response=> {
       if(!response.ok){
@@ -57,6 +58,7 @@ function updateWeatherData(lon, lat ){
       storageObject.MeteoweatherAPIData = data;
       console.log(storageObject.MeteoweatherAPIData)
   })
+      */
   const openMeteo15ApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude='+ lon + '&minutely_15=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&forecast_minutely_15=24';
   fetch(openMeteo15ApiUrl).then(response=> {
       if(!response.ok){
@@ -66,12 +68,13 @@ function updateWeatherData(lon, lat ){
   })
   .then(data => {
       storageObject.Meteo15MinuteData = data;
+      storageObject.hasUpdated = true;
       console.log(storageObject.Meteo15MinuteData)
   })
 
   
 
-  const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=c147b5c83a42fbf37236c537fb83e881';
+  /*const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=c147b5c83a42fbf37236c537fb83e881';
   fetch(openWeatherApiUrl).then(response=> {
       if(!response.ok){
           throw new Error('Openmeteo niet te bereiken')
@@ -81,9 +84,10 @@ function updateWeatherData(lon, lat ){
   .then(data => {
       storageObject.OpenWeatherAPIData = data;
       console.log(storageObject.OpenWeatherAPIData)
+      
   })
-
-  storageObject.hasUpdated = true;
+*/
+  
 }
 
 function pagina2(p) {
