@@ -1,4 +1,5 @@
 let storageObject = {
+    firstCall: false,
     hasBeenUpdated: false,
     locationData: {
         lat: 0,
@@ -12,6 +13,7 @@ const input = document.getElementById("locationfield");
 const searchButton = document.getElementById("searchButton");
 let apiResponse = {};
 searchButton.onclick = function(){
+    storageObject.firstCall = true;
     // Define the API URL
     
     const apiUrl = 'https://geocode.maps.co/search?q=' + input.value  + '&api_key=67346201ecee5360511634fte9d92c5';

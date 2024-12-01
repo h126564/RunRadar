@@ -8,12 +8,21 @@ let temperaturefeelslike = 2;
 let windgraden = 30;
 let windrichting;
 let icons2;
-
+let newIcons = [];
+let oldIcons = [];
 let clouds;
+let firstCall = true;
+let firstdraw = true;
+
   p.setup = function() {
     p.createCanvas(1900, 972);
     p.background("#222831");
     updateData();
+    for(let i = 0; i < 7; i++){
+      newIcons[i] = icons2;
+      oldIcons[i] = icons2;
+    }
+    
   }
 
   p.preload = function() {
@@ -26,9 +35,15 @@ let clouds;
   }
 
   p.draw = function() {
+    if(storageObject.firstCall){
+      firstCall = true;
+      storageObject.firstCall = false;
+    }
     count++;
-    if(count > 500){
+    if(count == 2){
       updateData();
+    }else if(count > 10){
+      firstCall = true;
       count = 0;
     }
     p.translate(0, p.height * 0.05);
@@ -69,18 +84,33 @@ let clouds;
 
   function updateData() {
     const weatherIconCode = "04n";
+    
     icons2 = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
     if(!storageObject.hasBeenUpdated){
       for (let i = 0; i < 7; i++) {
+        newIcons[i] = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
         icons[i] = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
       }
       return;
     }
     for (let i = 0; i < 7; i++) {
       
-      icons[i] = p.loadImage(
+      newIcons[i] = p.loadImage(
         `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[i].weather[0].icon}_t.png`
       );
+    }
+    let shouldUpdate = false;
+    for(let i = 0; i < 7; i++){
+      if(icons[i] !== newIcons[i]){
+        shouldUpdate = true
+      }
+    }
+    if(shouldUpdate){
+      icons = newIcons;
+      setTimeout(function() {  
+        oldIcons = icons
+      }, 100);
+
     }
   }
 
@@ -88,23 +118,35 @@ let clouds;
     if(!storageObject.hasBeenUpdated){
       return;
     }
-    p.fill("#393E46");
-    p.rect(50, 50, 900, 400, 50);
-    p.fill("white");
-    p.textSize(70);
-    p.text("Per uur", 80, 120);
-    p.fill("#222831");
+    if(firstdraw){
+      firstCall=true;
+      firstdraw = false;
+    }
+    if(firstCall){
+      p.fill("#393E46");
+      p.rect(50, 50, 900, 400, 50);
+      p.fill("white");
+      p.textSize(70);
+      p.text("Per uur", 80, 120);
+      p.fill("#222831");
+      
+    }
+    
 
     let currentTime = roundedTime();
 
     for (let i = 0; i < 7; i++) {
       let x = 80 + i * 123;
-      p.fill("#222831");
-      p.rect(x, 150, 100, 250, 10);
+      if(firstCall){
+        p.fill("#222831");
+        p.rect(x, 150, 100, 250, 10);
+        p.image(icons[i], x + 5, 180, 90, 90);
+      }
+      
       p.fill("white");
       p.textSize(30);
       p.textAlign(p.CENTER);
-      p.image(icons[i], x + 5, 180, 90, 90);
+      
       let hours = currentTime.getHours();
       let minutes = currentTime.getMinutes();
       let formattedTime = `${hours}:${minutes < 10 ? "0" + minutes : minutes}`;
@@ -120,6 +162,9 @@ let clouds;
       p.imageMode(p.CENTER);
       p.image(windrichting, 0, 0, 50, 50);
       p.pop();
+    }
+    if(firstCall){
+      firstCall= false;
     }
     p.textAlign(p.LEFT);
   }
@@ -174,22 +219,27 @@ let clouds;
   }
 
   function tweedaagse() {
-    p.fill("#393E46");
-    p.rect(50, 500, 900, 400, 50);
-    p.fill("#222831");
-    p.rect(80, 580, 405, 300, 30);
-    p.rect(515, 580, 405, 300, 30);
-    p.fill("white");
-    p.textSize(60);
-    p.text("2-daagse verwachting", 80, 540);
-    p.textSize(30);
-    p.text("Morgen:", 100, 610);
-    p.text("Overmorgen:", 535, 610);
+    if(firstCall){
+      p.fill("#393E46");
+      p.rect(50, 500, 900, 400, 50);
+      p.fill("#222831");
+      p.rect(80, 580, 405, 300, 30);
+      p.rect(515, 580, 405, 300, 30);
+      p.fill("white");
+      p.textSize(60);
+      p.text("2-daagse verwachting", 80, 540);
+      p.textSize(30);
+      p.text("Morgen:", 100, 610);
+      p.text("Overmorgen:", 535, 610);
+      p.image(icons2, 80, 650, 200, 200);
+      p.image(icons2, 515, 650, 200, 200);
+      firstCall = false;
+    }
+    
     const { morgenDatum, overmorgenDatum } = updateDates();
     p.text(morgenDatum, 100, 645);
     p.text(overmorgenDatum, 535, 645);
-    p.image(icons2, 80, 650, 200, 200);
-    p.image(icons2, 515, 650, 200, 200);
+    
     p.textSize(70);
     p.text(`${temperature}°C`, 310, 775);
     p.text(`${temperature}°C`, 745, 775);
