@@ -1,12 +1,13 @@
 
 
 function pagina1(p) {
-let icons2;
+  let count = 0;
 let icons = [];
 let temperature = 6;
 let temperaturefeelslike = 2;
 let windgraden = 30;
 let windrichting;
+let icons2;
 
 let clouds;
   p.setup = function() {
@@ -25,6 +26,11 @@ let clouds;
   }
 
   p.draw = function() {
+    count++;
+    if(count > 500){
+      updateData();
+      count = 0;
+    }
     p.translate(0, p.height * 0.05);
     peruur();
     weervandaag();
@@ -63,14 +69,19 @@ let clouds;
 
   function updateData() {
     const weatherIconCode = "04n";
+    icons2 = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
+    if(!storageObject.hasBeenUpdated){
+      for (let i = 0; i < 7; i++) {
+        icons[i] = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
+      }
+      return;
+    }
     for (let i = 0; i < 7; i++) {
+      
       icons[i] = p.loadImage(
-        `https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`
+        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[i].weather[0].icon}_t.png`
       );
     }
-    icons2 = p.loadImage(
-      `https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`
-    );
   }
 
   function peruur() {
