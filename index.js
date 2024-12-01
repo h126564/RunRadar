@@ -1,4 +1,5 @@
 let storageObject = {
+    hasBeenUpdated: false,
     locationData: {
         lat: 0,
         lon: 0,
@@ -66,6 +67,7 @@ function updateWeatherData(){
     .then(data => {
         storageObject.OpenWeatherAPIData = data;
         console.log(storageObject.OpenWeatherAPIData)
+        storageObject.hasBeenUpdated = true;
     })
 
 

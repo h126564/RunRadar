@@ -7,8 +7,8 @@ let temperature = 6;
 let temperaturefeelslike = 2;
 let windgraden = 30;
 let windrichting;
-let windsnelheid = 21;
 
+let clouds;
   p.setup = function() {
     p.createCanvas(1900, 972);
     p.background("#222831");
@@ -74,6 +74,9 @@ let windsnelheid = 21;
   }
 
   function peruur() {
+    if(!storageObject.hasBeenUpdated){
+      return;
+    }
     p.fill("#393E46");
     p.rect(50, 50, 900, 400, 50);
     p.fill("white");
@@ -95,14 +98,14 @@ let windsnelheid = 21;
       let minutes = currentTime.getMinutes();
       let formattedTime = `${hours}:${minutes < 10 ? "0" + minutes : minutes}`;
       p.text(formattedTime, x + 48, 190);
-      p.text(`${temperature}°C`, x + 48, 280);
+      p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[i].main.temp - 273.15)}°C`, x + 48, 280);
       currentTime.setHours(currentTime.getHours() + 3);
       p.textSize(25);
-      p.text(`${windsnelheid} km/h`, x + 50, 380);
+      p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[i].wind.speed * 3600 / 1000)} km/h`, x + 50, 380);
       p.push();
       p.angleMode(p.DEGREES);
       p.translate(x + 50, 315);
-      p.rotate(windgraden);
+      p.rotate(storageObject.OpenWeatherAPIData.list[i].wind.deg);
       p.imageMode(p.CENTER);
       p.image(windrichting, 0, 0, 50, 50);
       p.pop();
