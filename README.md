@@ -13,3 +13,8 @@ api geocoding: https://geocode.maps.co/search?q=helinium&api_key=67346201ecee536
 
 APi call openweatherforecast: https://api.openweathermap.org/data/2.5/forecast?lat=51.826&lon=4.118&appid=c147b5c83a42fbf37236c537fb83e881
 API call openweatherlive: https://api.openweathermap.org/data/2.5/weather?lat=51.826&lon=4.118&appid=c147b5c83a42fbf37236c537fb83e881
+
+
+
+wij gebruiken de apis, stoppen deze in een global object waardoor wij niet in verschillende js bestand voor dezelfde paginas de api meerdere keren hoeven te callen
+Wij gebruiken waar mogelijk (bv op pagina 1 per uur gedeelte en 2 daagse verwachting) lazy rendering ipv per frame rendering
