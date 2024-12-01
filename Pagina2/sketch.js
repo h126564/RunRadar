@@ -166,7 +166,7 @@ function pagina2(p) {
       p.push();
       p.angleMode(p.DEGREES);
       p.translate(x + 50, 775);
-      p.rotate(storageObject.Meteo15MinuteData.minutely_15.wind_direction_10m[i]);
+      p.rotate(storageObject.Meteo15MinuteData.minutely_15.wind_direction_10m[i]+180);
       p.imageMode(p.CENTER);
       p.image(windrichting, 0, 0, 50, 50);
       p.pop();
