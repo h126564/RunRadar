@@ -246,6 +246,7 @@ let firstdraw = true;
   }
 
   function drawRoundedImage(img, x, y, w, h, r) {
+    
     let mask = p.createGraphics(w, h);
     mask.fill(255);
     mask.noStroke();
