@@ -14,7 +14,7 @@ function pagina3(p) {
   }
 
   p.draw = function() {
-    p.translate(0, p.height * 0.1); // Translate the entire canvas 10% down
+    p.translate(0, p.height * 0.05); 
     zoekscherm();
     kaart();
     bestetijd();
