@@ -5,3 +5,14 @@ html, body {
 canvas {
   display: block;
 }
+
+#StartDiv{
+  position:absolute;
+  top:100px;
+  left:100px;
+}
+#EndDiv{
+  position: absolute;
+  top: 100px;
+  left: 300px;
+}

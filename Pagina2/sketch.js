@@ -1,3 +1,15 @@
+const startInput = document.getElementById("startLocationField");
+const startSearchButton = document.getElementById("startSearchButton");
+const endInput = document.getElementById("endLocationField");
+const endSearchButton = document.getElementById("endSearchButton");
+
+startSearchButton.onclick = function(){
+  updateLocation(startSearchButton.value)
+}
+endSearchButton.onclick = function(){
+  updateLocation(endSearchButton.value)
+}
+
 let storageObject = {
   hasUpdated: false,
   locationData: {
@@ -14,6 +26,35 @@ function updateLocation(){
   // Define the API URL
   
   const apiUrl = 'https://geocode.maps.co/search?q=' +  "Helinium"  + '&api_key=67346201ecee5360511634fte9d92c5';
+
+  // Make a GET request
+  fetch(apiUrl)
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return response.json();
+  })
+  .then(data => {
+      if(data.length == 0){
+          alert("Locatie niet gevonden");
+          throw new Error('Parameter is not a location!');
+      }
+      apiResponse=data[0];
+      storageObject.locationData.lat = apiResponse.lat;
+      storageObject.locationData.lon = apiResponse.lon;
+      updateWeatherData(storageObject.locationData.lon, storageObject.locationData.lat);
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+
+};
+
+function updateLocation(locationName){
+  // Define the API URL
+  
+  const apiUrl = 'https://geocode.maps.co/search?q=' +  locationName  + '&api_key=67346201ecee5360511634fte9d92c5';
 
   // Make a GET request
   fetch(apiUrl)
@@ -101,9 +142,7 @@ function pagina2(p) {
     p.background("#222831");
     updateData();
   }
-  p.mousePressed = function(){
-    updateLocation();
-  }
+
   p.preload = function() {
     windrichting = p.loadImage("Pagina2/direction.png");
   }
