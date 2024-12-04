@@ -158,7 +158,7 @@ let firstdraw = true;
       p.push();
       p.angleMode(p.DEGREES);
       p.translate(x + 50, 315);
-      p.rotate(storageObject.OpenWeatherAPIData.list[i].wind.deg);
+      p.rotate(storageObject.OpenWeatherAPIData.list[i].wind.deg + 180);
       p.imageMode(p.CENTER);
       p.image(windrichting, 0, 0, 50, 50);
       p.pop();
