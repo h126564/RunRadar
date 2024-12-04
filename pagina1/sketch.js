@@ -180,7 +180,7 @@ let firstdraw = true;
     p.stroke("black");
     p.fill("white");
     let String = storageObject.locationData.name;
-    let A = split(String, ','); 
+    let A = p.split(String, ','); 
     let rectX = 1425;
     let rectY = 150;
     let rectWidth = 500;
