@@ -195,7 +195,7 @@ let firstdraw = true;
     let textSizeValue = 1;
     p.textSize(textSizeValue);
     while (
-      p.textWidth(A[spot]) < rectWidth - 20 &&
+      p.textWidth(A[-spot]) < rectWidth - 20 &&
       p.textAscent() + p.textDescent() < rectHeight - 20
     ) {
       textSizeValue++;
