@@ -1,11 +1,10 @@
 
 
 function pagina1(p) {
-  let count = 0;
+let count = 0;
 let icons = [];
 let temperature = 6;
 let temperaturefeelslike = 2;
-let windgraden = 30;
 let windrichting;
 let icons2;
 let newIcons = [];
@@ -201,9 +200,9 @@ let firstdraw = true;
     p.text(reverseA[3], -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
     p.textAlign(p.CENTER)
     p.textSize(70)
-    p.text(`${temperature}°C`, 1425, 280);
+    p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[1].main.temp - 273.15)}°C`, 1425, 280);
     p.textSize(40)
-    p.text(`Voelt aan als: ${temperaturefeelslike}°C`, 1425, 330);
+    p.text(`Voelt aan als: ${Math.round(storageObject.OpenWeatherAPIData.list[1].main.feels_like - 273.15)}°C`, 1425, 330);
     p.textAlign(p.LEFT);
     p.image(sunset, 1080, 400);
     p.image(sunrise, 1080, 600);
