@@ -179,7 +179,8 @@ let firstdraw = true;
     p.rectMode(p.CORNER);
     p.stroke("black");
     p.fill("white");
-    let textContent = "Hellevoetsuis";
+    let string = storageObject.locationData.name,
+    let A = split(String, '/'); 
     let rectX = 1425;
     let rectY = 150;
     let rectWidth = 500;
@@ -187,7 +188,7 @@ let firstdraw = true;
     let textSizeValue = 1;
     p.textSize(textSizeValue);
     while (
-      p.textWidth(textContent) < rectWidth - 20 &&
+      p.textWidth(A[4]) < rectWidth - 20 &&
       p.textAscent() + p.textDescent() < rectHeight - 20
     ) {
       textSizeValue++;
@@ -196,7 +197,7 @@ let firstdraw = true;
     textSizeValue--;
     p.textSize(textSizeValue);
     p.textAlign(p.CENTER, p.CENTER);
-    p.text(textContent, -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
+    p.text(A[4], -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
     p.textAlign(p.CENTER)
     p.textSize(70)
     p.text(`${temperature}°C`, 1425, 280);
