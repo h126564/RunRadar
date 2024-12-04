@@ -181,10 +181,7 @@ let firstdraw = true;
     p.fill("white");
     let String = storageObject.locationData.name;
     let A = p.split(String, ','); 
-    console.log(A)
-    A.reverse()
-    console.log(spot)
-    console.log(spot)
+    let reverseA = p.reverse(A)
     let rectX = 1425;
     let rectY = 150;
     let rectWidth = 500;
@@ -192,7 +189,7 @@ let firstdraw = true;
     let textSizeValue = 1;
     p.textSize(textSizeValue);
     while (
-      p.textWidth(A[spot]) < rectWidth - 20 &&
+      p.textWidth(reverseA[2]) < rectWidth - 20 &&
       p.textAscent() + p.textDescent() < rectHeight - 20
     ) {
       textSizeValue++;
@@ -201,7 +198,7 @@ let firstdraw = true;
     textSizeValue--;
     p.textSize(textSizeValue);
     p.textAlign(p.CENTER, p.CENTER);
-    p.text(A[4], -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
+    p.text(reverseA[2], -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
     p.textAlign(p.CENTER)
     p.textSize(70)
     p.text(`${temperature}°C`, 1425, 280);
