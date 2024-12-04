@@ -182,7 +182,7 @@ let firstdraw = true;
     let String = storageObject.locationData.name;
     let A = p.split(String, ','); 
     console.log(A)
-    let spot = A.lenght-1; 
+    let spot = A.length-1; 
     console.log(spot)
     if(spot>2) {
       spot= spot -2
