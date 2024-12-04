@@ -179,7 +179,7 @@ let firstdraw = true;
     p.rectMode(p.CORNER);
     p.stroke("black");
     p.fill("white");
-    let string = storageObject.locationData.name,
+    let String = storageObject.locationData.name,
     let A = split(String, ','); 
     let rectX = 1425;
     let rectY = 150;
