@@ -181,10 +181,13 @@ let firstdraw = true;
     p.fill("white");
     let String = storageObject.locationData.name;
     let A = p.split(String, ','); 
+    console.log(A)
     let spot = A.lenght-1; 
+    console.log(spot)
     if(spot>2) {
       spot= spot -2
     }
+    console.log(spot)
     let rectX = 1425;
     let rectY = 150;
     let rectWidth = 500;
