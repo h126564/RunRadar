@@ -182,11 +182,8 @@ let firstdraw = true;
     let String = storageObject.locationData.name;
     let A = p.split(String, ','); 
     console.log(A)
-    let spot = A.length-1; 
+    A.reverse()
     console.log(spot)
-    if(spot>2) {
-      spot= spot -2
-    }
     console.log(spot)
     let rectX = 1425;
     let rectY = 150;
@@ -195,7 +192,7 @@ let firstdraw = true;
     let textSizeValue = 1;
     p.textSize(textSizeValue);
     while (
-      p.textWidth(A[-spot]) < rectWidth - 20 &&
+      p.textWidth(A[spot]) < rectWidth - 20 &&
       p.textAscent() + p.textDescent() < rectHeight - 20
     ) {
       textSizeValue++;
