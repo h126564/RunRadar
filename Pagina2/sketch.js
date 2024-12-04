@@ -4,10 +4,10 @@ const endInput = document.getElementById("endLocationField");
 const endSearchButton = document.getElementById("endSearchButton");
 
 startSearchButton.onclick = function(){
-  updateLocation(startSearchButton.value)
+  updateLocation(startSearchButton.value, 0);
 }
 endSearchButton.onclick = function(){
-  updateLocation(endSearchButton.value)
+  updateLocation(endSearchButton.value, 1)
 }
 
 let storageObject = {
@@ -15,6 +15,12 @@ let storageObject = {
   locationData: {
       lat: 0,
       lon: 0,
+  },
+  RouteData: {
+    startLat: 0,
+    startLon: 0,
+    endLat: 0,
+    startLon: 0,
   },
   Meteo15MinuteData: {},
   MeteoweatherAPIData: {},
@@ -51,7 +57,7 @@ function updateLocation(){
 
 };
 
-function updateLocation(locationName){
+function updateLocation(locationName, startOrEnd){
   // Define the API URL
   
   const apiUrl = 'https://geocode.maps.co/search?q=' +  locationName  + '&api_key=67346201ecee5360511634fte9d92c5';
@@ -70,6 +76,9 @@ function updateLocation(locationName){
           throw new Error('Parameter is not a location!');
       }
       apiResponse=data[0];
+      if(startOrEnd == 0){
+
+      }
       storageObject.locationData.lat = apiResponse.lat;
       storageObject.locationData.lon = apiResponse.lon;
       updateWeatherData(storageObject.locationData.lon, storageObject.locationData.lat);
