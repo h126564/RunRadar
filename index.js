@@ -4,6 +4,7 @@ let storageObject = {
     locationData: {
         lat: 0,
         lon: 0,
+        name: "",
     },
     MeteoweatherAPIData: {},
     OpenWeatherAPIData: {},
@@ -34,6 +35,7 @@ searchButton.onclick = function(){
         apiResponse=data[0];
         storageObject.locationData.lat = apiResponse.lat;
         storageObject.locationData.lon = apiResponse.lon;
+        storageObject.locationData.name = apiRespone.display_name
         updateWeatherData();
     })
     .catch(error => {
