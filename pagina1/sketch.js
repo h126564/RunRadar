@@ -15,7 +15,7 @@ let firstCall = true;
 let firstdraw = true;
 
   p.setup = function() {
-    p.createCanvas(1890, 940);
+    p.createCanvas(1890, 930);
     p.background("#222831");
     updateData();
     for(let i = 0; i < 7; i++){
@@ -46,7 +46,7 @@ let firstdraw = true;
       firstCall = true;
       count = 0;
     }
-    p.translate(0, p.height * 0.05);
+    p.translate(0, p.height * 0.04);
     peruur();
     weervandaag();
     tweedaagse();
