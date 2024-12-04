@@ -15,7 +15,7 @@ let firstCall = true;
 let firstdraw = true;
 
   p.setup = function() {
-    p.createCanvas(1900, 972);
+    p.createCanvas(1890, 930);
     p.background("#222831");
     updateData();
     for(let i = 0; i < 7; i++){
