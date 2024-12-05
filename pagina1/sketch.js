@@ -250,8 +250,8 @@ function weervandaag() {
       p.textSize(30);
       p.text("Morgen:", 100, 610);
       p.text("Overmorgen:", 535, 610);
-      p.image(icons[8], 80, 650, 200, 200);
-      p.image(Icons[16], 515, 650, 200, 200);
+     // p.image(icons[8], 80, 650, 200, 200);
+      //p.image(Icons[16], 515, 650, 200, 200);
 
     const { morgenDatum, overmorgenDatum } = updateDates();
     
