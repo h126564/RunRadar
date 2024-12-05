@@ -245,7 +245,7 @@ let firstdraw = true;
     }
     
     const { morgenDatum, overmorgenDatum } = updateDates();
-    p.textSize(70);
+    p.textSize(30);
     p.text(morgenDatum, 100, 645);
     p.text(overmorgenDatum, 535, 645);
     
