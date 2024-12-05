@@ -237,38 +237,58 @@ function weervandaag() {
 }
 
 
-function tweedaagse() {
-  if (firstCall) {
-    p.fill("#393E46");
-    p.rect(50, 500, 900, 400, 50);
-    p.fill("#222831");
-    p.rect(80, 580, 405, 300, 30);
-    p.rect(515, 580, 405, 300, 30);
-    p.fill("white");
-    p.textSize(60);
-    p.text("2-daagse verwachting", 80, 540);
-    firstCall = false;
-  }
-  const { morgenDatum, overmorgenDatum } = updateDates();
-  p.fill("white");
-  p.textSize(30);
-  p.text(`Morgen: ${morgenDatum}`, 100, 610);
-  p.text(`Overmorgen: ${overmorgenDatum}`, 535, 610);
-  const morgenIcon = p.loadImage(
+  function tweedaagse() {
+      p.fill("#393E46");
+      p.rect(50, 500, 900, 400, 50);
+      p.fill("#222831");
+      p.rect(80, 580, 405, 300, 30);
+      p.rect(515, 580, 405, 300, 30);
+      p.fill("white");
+      p.textSize(60);
+      p.text("2-daagse verwachting", 80, 540);
+      p.textSize(30);
+      p.text("Morgen:", 100, 610);
+      p.text("Overmorgen:", 535, 610);
+      const morgenIcon = p.loadImage(
     `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather[0].icon}_t.png`
   );
   const overmorgenIcon = p.loadImage(
     `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather[0].icon}_t.png`
   );
-  p.image(morgenIcon, 120, 650, 150, 150);
-  p.image(overmorgenIcon, 555, 650, 150, 150);
-  const morgenTemp = Math.round(storageObject.OpenWeatherAPIData.list[8].main.temp - 273.15);
-  const overmorgenTemp = Math.round(storageObject.OpenWeatherAPIData.list[16].main.temp - 273.15);
-  p.textSize(70);
-  p.text(`${morgenTemp}°C`, 310, 775);
-  p.text(`${overmorgenTemp}°C`, 745, 775);
-}
+      p.image(morgenIcon, 80, 650, 200, 200);
+      p.image(overmorgenIcon, 515, 650, 200, 200);
+    
+    const { morgenDatum, overmorgenDatum } = updateDates();
+    
+    p.textSize(30);
+    p.text(morgenDatum, 100, 645);
+    p.text(overmorgenDatum, 535, 645);
+    const morgenTemp = Math.round(storageObject.OpenWeatherAPIData.list[8].main.temp - 273.15);
+    const overmorgenTemp = Math.round(storageObject.OpenWeatherAPIData.list[16].main.temp - 273.15);
+    p.textSize(70);
+    p.text(`${morgenTemp}°C`, 310, 775);
+    p.text(`${overmorgenTemp}°C`, 745, 775);
+  }
 
+  function drawRoundedImage(img, x, y, w, h, r) {
+    
+    
+    mask.fill(255);
+    mask.noStroke();
+    mask.rect(0, 0, w, h, r);
+    img.mask(mask);
+    p.image(img, x, y, w, h);
+  }
+
+  function roundedTime() {
+    let now = new Date();
+    let hours = now.getHours();
+    now.setMinutes(0, 0, 0);
+    if (now.getMinutes() > 30) {
+      now.setHours(hours + 1);
+    }
+    return now;
+  }
 }
 
 new p5(pagina1);
