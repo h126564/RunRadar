@@ -185,8 +185,8 @@ let firstdraw = true;
     let A = p.split(String, ','); 
     let reverseA = p.reverse(A)
     if(reverseA.length != 0){
-      
-    
+      return;
+    }
     let rectX = 1425;
     let rectY = 150;
     let rectWidth = 500;
@@ -210,7 +210,7 @@ let firstdraw = true;
     p.textSize(40)
     p.text(`Voelt aan als: ${Math.round(storageObject.OpenWeatherAPIData.list[0].main.feels_like - 273.15)}°C`, 1425, 330);
     p.textAlign(p.LEFT);
-  }
+
     p.image(sunset, 1080, 400);
     p.image(sunrise, 1080, 600);
     p.image(humidity, 1420, 400);
