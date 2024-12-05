@@ -170,9 +170,16 @@ let mask;
     p.textAlign(p.LEFT);
   }
 
-  function weervandaag() {
-    if(!storageObject.hasBeenUpdated){
-      return;
+  function formatUnixTime(unixTime) {
+    const date = new Date(unixTime * 1000); 
+    const hours = String(date.getHours()).padStart(2, '0'); 
+    const minutes = String(date.getMinutes()).padStart(2, '0'); 
+    return `${hours}:${minutes}`; 
+}
+
+function weervandaag() {
+    if (!storageObject.hasBeenUpdated) {
+        return;
     }
     p.fill("#393E46AA");
     drawRoundedImage(clouds, 1000, 50, 850, 850, 50);
@@ -183,12 +190,14 @@ let mask;
     p.rectMode(p.CORNER);
     p.stroke("black");
     p.fill("white");
+
     let String = storageObject.locationData.name;
     let A = p.split(String, ','); 
-    let reverseA = p.reverse(A)
-    if(reverseA.length == 0){
-      return;
+    let reverseA = p.reverse(A);
+    if (reverseA.length == 0) {
+        return;
     }
+
     let rectX = 1425;
     let rectY = 150;
     let rectWidth = 500;
@@ -196,23 +205,23 @@ let mask;
     let textSizeValue = 1;
     p.textSize(textSizeValue);
     while (
-      p.textWidth(reverseA[3]) < rectWidth - 20 &&
-      p.textAscent() + p.textDescent() < rectHeight - 20
+        p.textWidth(reverseA[3]) < rectWidth - 20 &&
+        p.textAscent() + p.textDescent() < rectHeight - 20
     ) {
-      textSizeValue++;
-      p.textSize(textSizeValue);
+        textSizeValue++;
+        p.textSize(textSizeValue);
     }
     textSizeValue--;
-    if(textSizeValue < 30){
-      textSizeValue = 30;
+    if (textSizeValue < 30) {
+        textSizeValue = 30;
     }
     p.textSize(textSizeValue);
     p.textAlign(p.CENTER, p.CENTER);
     p.text(reverseA[3], -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
-    p.textAlign(p.CENTER)
-    p.textSize(70)
+    p.textAlign(p.CENTER);
+    p.textSize(70);
     p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[0].main.temp - 273.15)}°C`, 1425, 280);
-    p.textSize(40)
+    p.textSize(40);
     p.text(`Voelt aan als: ${Math.round(storageObject.OpenWeatherAPIData.list[0].main.feels_like - 273.15)}°C`, 1425, 330);
     p.textAlign(p.LEFT);
 
@@ -220,16 +229,21 @@ let mask;
     p.image(sunrise, 1080, 600);
     p.image(humidity, 1420, 400);
     p.image(pressure, 1420, 600);
-    p.textSize(30)
+
+    const sunsetTime = formatUnixTime(storageObject.OpenWeatherAPIData.list[0].sys.sunset);
+    const sunriseTime = formatUnixTime(storageObject.OpenWeatherAPIData.list[0].sys.sunrise);
+
+    p.textSize(30);
     p.text('Zonsondergang:', 1185, 420);
-    p.text(storageObject.OpenWeatherAPIData.list[0].sys.sunset, 1185, 465);
+    p.text(sunsetTime, 1185, 465);
     p.text('Zonsopkomst:', 1185, 620);
-    p.text(storageObject.OpenWeatherAPIData.list[0].sys.sunrise, 1185, 665);
+    p.text(sunriseTime, 1185, 665);
     p.text('Luchtvochtigheid:', 1525, 420);
     p.text(storageObject.OpenWeatherAPIData.list[0].main.humidity + ' %', 1525, 465);
     p.text('Luchtdruk', 1525, 620);
     p.text(storageObject.OpenWeatherAPIData.list[0].main.pressure + ' hPa', 1525, 665);
-  }
+}
+
 
   function tweedaagse() {
     if(firstCall){
