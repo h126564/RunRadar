@@ -158,7 +158,7 @@ let mask;
       p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[i].wind.speed * 3600 / 1000)} km/h`, x + 50, 380);
       p.push();
       p.angleMode(p.DEGREES);
-      p.translate(x + 50, 320);
+      p.translate(x + 50, 325);
       p.rotate(storageObject.OpenWeatherAPIData.list[i].wind.deg + 180);
       p.imageMode(p.CENTER);
       p.image(windrichting, 0, 0, 50, 50);
@@ -222,13 +222,13 @@ let mask;
     p.image(pressure, 1420, 600);
     p.textSize(30)
     p.text('Zonsondergang:', 1185, 420);
-    p.text('17:01', 1185, 465);
+    p.text(storageObject.OpenWeatherAPIData.list[0].sys.sunset, 1185, 465);
     p.text('Zonsopkomst:', 1185, 620);
-    p.text('07:52', 1185, 665);
+    p.text(storageObject.OpenWeatherAPIData.list[0].sys.sunrise, 1185, 665);
     p.text('Luchtvochtigheid:', 1525, 420);
-    p.text('83%', 1525, 465);
+    p.text(storageObject.OpenWeatherAPIData.list[0].main.humidity + '%', 1525, 465);
     p.text('Luchtdruk', 1525, 620);
-    p.text('1025 hPa', 1525, 665);
+    p.text(storageObject.OpenWeatherAPIData.list[0].main.pressure + 'hPa', 1525, 665);
   }
 
   function tweedaagse() {
