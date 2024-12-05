@@ -178,9 +178,9 @@ let mask;
 }
 
 function weervandaag() {
-    if (!storageObject.hasBeenUpdated && !storageObject1.hasBeenUpdated) {
-        return;
-    }
+  if (!(storageObject && storageObject1) || (!storageObject.hasBeenUpdated && !storageObject1.hasBeenUpdated)) {
+    return;
+}
     p.fill("#393E46AA");
     drawRoundedImage(clouds, 1000, 50, 850, 850, 50);
     p.rectMode(p.CENTER);
