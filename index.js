@@ -8,14 +8,20 @@ let storageObject = {
     },
     MeteoweatherAPIData: {},
     OpenWeatherAPIData: {},
-    OpenWeatherAPIData1: {},
 
 };
+let storageObject1 = {
+    OpenWeatherAPIData1: {},
+    firstCall: false,
+    hasBeenUpdated: false,
+}
+
 const input = document.getElementById("locationfield");
 const searchButton = document.getElementById("searchButton");
 let apiResponse = {};
 searchButton.onclick = function(){
     storageObject.firstCall = true;
+    storageObject1.firstCall = true
     // Define the API URL
     
     const apiUrl = 'https://geocode.maps.co/search?q=' + input.value  + '&api_key=67346201ecee5360511634fte9d92c5';
@@ -83,7 +89,7 @@ function updateWeatherData(){
         return response.json();
     })
     .then(data => {
-        storageObject.OpenWeatherAPIDatanow = data;
+        storageObject1.OpenWeatherAPIDatanow = data;
         console.log(storageObject.OpenWeatherAPIDatanow)
         storageObject1.hasBeenUpdated = true;
     })

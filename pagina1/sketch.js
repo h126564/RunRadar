@@ -230,8 +230,8 @@ function weervandaag() {
     p.image(humidity, 1420, 400);
     p.image(pressure, 1420, 600);
 
-    const sunsetTime = formatUnixTime(storageObject.OpenWeatherAPIDatanow.sys.sunset);
-    const sunriseTime = formatUnixTime(storageObject.OpenWeatherAPIDatanow.sys.sunrise);
+    const sunsetTime = formatUnixTime(storageObject1.OpenWeatherAPIDatanow.sys.sunset);
+    const sunriseTime = formatUnixTime(storageObject1.OpenWeatherAPIDatanow.sys.sunrise);
 
     p.textSize(30);
     p.text('Zonsondergang:', 1185, 420);
