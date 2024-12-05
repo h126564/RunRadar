@@ -186,7 +186,7 @@ let mask;
     let String = storageObject.locationData.name;
     let A = p.split(String, ','); 
     let reverseA = p.reverse(A)
-    if(reverseA.length != 0){
+    if(reverseA.length == 0){
       return;
     }
     let rectX = 1425;
