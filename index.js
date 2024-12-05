@@ -8,6 +8,7 @@ let storageObject = {
     },
     MeteoweatherAPIData: {},
     OpenWeatherAPIData: {},
+    OpenWeatherAPIDatanow {},
 
 };
 const input = document.getElementById("locationfield");
@@ -73,6 +74,20 @@ function updateWeatherData(){
         console.log(storageObject.OpenWeatherAPIData)
         storageObject.hasBeenUpdated = true;
     })
+
+    const openWeatherApiUrlnow = 'https://api.openweathermap.org/data/2.5/weather?lat=' + storageObject.locationData.lat + '&lon='+ storageObject.locationData.lon + '&appid=c147b5c83a42fbf37236c537fb83e881';
+    fetch(openWeatherApiUrlnow).then(response=> {
+        if(!response.ok){
+            throw new Error('Openmeteo niet te bereiken')
+        }
+        return response.json();
+    })
+    .then(data => {
+        storageObject.OpenWeatherAPIDatanow = data;
+        console.log(storageObject.OpenWeatherAPIDatanow)
+        storageObject.hasBeenUpdated = true;
+    })
+
 
 
 }
