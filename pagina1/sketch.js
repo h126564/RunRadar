@@ -201,6 +201,9 @@ let firstdraw = true;
       p.textSize(textSizeValue);
     }
     textSizeValue--;
+    if(textSizeValue < 30){
+      textSizeValue = 30;
+    }
     p.textSize(textSizeValue);
     p.textAlign(p.CENTER, p.CENTER);
     p.text(reverseA[3], -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);

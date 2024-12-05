@@ -35,7 +35,7 @@ searchButton.onclick = function(){
         apiResponse=data[0];
         storageObject.locationData.lat = apiResponse.lat;
         storageObject.locationData.lon = apiResponse.lon;
-        storageObject.locationData.name = apiResponse.display_name
+        storageObject.locationData.name = apiResponse.display_name;
         updateWeatherData();
     })
     .catch(error => {
