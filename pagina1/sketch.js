@@ -1,24 +1,27 @@
+
+
 function pagina1(p) {
-  let count = 0;
-  let icons = [];
-  let temperature = 6;
-  let temperaturefeelslike = 2;
-  let windrichting;
-  let icons2;
-  let newIcons = [];
-  let oldIcons = [];
-  let clouds;
-  let firstCall = true;
-  let firstdraw = true;
+let count = 0;
+let icons = [];
+let temperature = 6;
+let temperaturefeelslike = 2;
+let windrichting;
+let icons2;
+let newIcons = [];
+let oldIcons = [];
+let clouds;
+let firstCall = true;
+let firstdraw = true;
 
   p.setup = function() {
     p.createCanvas(1890, 930);
     p.background("#222831");
     updateData();
-    for (let i = 0; i < 7; i++) {
+    for(let i = 0; i < 7; i++){
       newIcons[i] = icons2;
       oldIcons[i] = icons2;
     }
+    
   }
 
   p.preload = function() {
@@ -31,14 +34,14 @@ function pagina1(p) {
   }
 
   p.draw = function() {
-    if (storageObject.firstCall) {
+    if(storageObject.firstCall){
       firstCall = true;
       storageObject.firstCall = false;
     }
     count++;
-    if (count == 2) {
+    if(count == 2){
       updateData();
-    } else if (count > 10) {
+    }else if(count > 10){
       firstCall = true;
       count = 0;
     }
@@ -50,7 +53,7 @@ function pagina1(p) {
 
   function getDayInDutch(date) {
     const dagen = [
-      "zondag", "maandag", "dinsdag", "woensdag", "donderdag",
+      "zondag", "maandag", "dinsdag", "woensdag", "donderdag", 
       "vrijdag", "zaterdag"
     ];
     return dagen[date.getDay()];
@@ -58,7 +61,7 @@ function pagina1(p) {
 
   function getMonthInDutch(date) {
     const maanden = [
-      "januari", "februari", "maart", "april", "mei", "juni",
+      "januari", "februari", "maart", "april", "mei", "juni", 
       "juli", "augustus", "september", "oktober", "november", "december"
     ];
     return maanden[date.getMonth()];
@@ -80,9 +83,9 @@ function pagina1(p) {
 
   function updateData() {
     const weatherIconCode = "04n";
-
+    
     icons2 = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
-    if (!storageObject.hasBeenUpdated) {
+    if(!storageObject.hasBeenUpdated){
       for (let i = 0; i < 7; i++) {
         newIcons[i] = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
         icons[i] = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
@@ -90,57 +93,59 @@ function pagina1(p) {
       return;
     }
     for (let i = 0; i < 7; i++) {
-
+      
       newIcons[i] = p.loadImage(
         `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[i].weather[0].icon}_t.png`
       );
     }
     let shouldUpdate = false;
-    for (let i = 0; i < 7; i++) {
-      if (icons[i] !== newIcons[i]) {
+    for(let i = 0; i < 7; i++){
+      if(icons[i] !== newIcons[i]){
         shouldUpdate = true
       }
     }
-    if (shouldUpdate) {
+    if(shouldUpdate){
       icons = newIcons;
-      setTimeout(function () {
+      setTimeout(function() {  
         oldIcons = icons
       }, 100);
+
     }
   }
 
   function peruur() {
-    if (!storageObject.hasBeenUpdated) {
+    if(!storageObject.hasBeenUpdated){
       return;
     }
-    if (firstdraw) {
-      firstCall = true;
+    if(firstdraw){
+      firstCall=true;
       firstdraw = false;
     }
-    if (firstCall) {
+    if(firstCall){
       p.fill("#393E46");
       p.rect(50, 50, 900, 400, 50);
       p.fill("white");
       p.textSize(70);
       p.text("Per uur", 80, 120);
       p.fill("#222831");
-
+      
     }
+    
 
     let currentTime = roundedTime();
 
     for (let i = 0; i < 7; i++) {
       let x = 80 + i * 123;
-      if (firstCall) {
+      if(firstCall){
         p.fill("#222831");
         p.rect(x, 150, 100, 250, 10);
         p.image(icons[i], x + 5, 180, 90, 90);
       }
-
+      
       p.fill("white");
       p.textSize(30);
       p.textAlign(p.CENTER);
-
+      
       let hours = currentTime.getHours();
       let minutes = currentTime.getMinutes();
       let formattedTime = `${hours}:${minutes < 10 ? "0" + minutes : minutes}`;
@@ -157,14 +162,14 @@ function pagina1(p) {
       p.image(windrichting, 0, 0, 50, 50);
       p.pop();
     }
-    if (firstCall) {
-      firstCall = false;
+    if(firstCall){
+      firstCall= false;
     }
     p.textAlign(p.LEFT);
   }
 
   function weervandaag() {
-    if (!storageObject.hasBeenUpdated) {
+    if(!storageObject.hasBeenUpdated){
       return;
     }
     p.fill("#393E46AA");
@@ -177,35 +182,35 @@ function pagina1(p) {
     p.stroke("black");
     p.fill("white");
     let String = storageObject.locationData.name;
-    let A = p.split(String, ',');
+    let A = p.split(String, ','); 
     let reverseA = p.reverse(A)
-    if (reverseA.length != 0) {
-
-
-      let rectX = 1425;
-      let rectY = 150;
-      let rectWidth = 500;
-      let rectHeight = 100;
-      let textSizeValue = 1;
+    if(reverseA.length != 0){
+      
+    
+    let rectX = 1425;
+    let rectY = 150;
+    let rectWidth = 500;
+    let rectHeight = 100;
+    let textSizeValue = 1;
+    p.textSize(textSizeValue);
+    while (
+      p.textWidth(reverseA[3]) < rectWidth - 20 &&
+      p.textAscent() + p.textDescent() < rectHeight - 20
+    ) {
+      textSizeValue++;
       p.textSize(textSizeValue);
-      while (
-        p.textWidth(reverseA[3]) < rectWidth - 20 &&
-        p.textAscent() + p.textDescent() < rectHeight - 20
-      ) {
-        textSizeValue++;
-        p.textSize(textSizeValue);
-      }
-      textSizeValue--;
-      p.textSize(textSizeValue);
-      p.textAlign(p.CENTER, p.CENTER);
-      p.text(reverseA[3], -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
-      p.textAlign(p.CENTER)
-      p.textSize(70)
-      p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[0].main.temp - 273.15)}°C`, 1425, 280);
-      p.textSize(40)
-      p.text(`Voelt aan als: ${Math.round(storageObject.OpenWeatherAPIData.list[0].main.feels_like - 273.15)}°C`, 1425, 330);
-      p.textAlign(p.LEFT);
     }
+    textSizeValue--;
+    p.textSize(textSizeValue);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text(reverseA[3], -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
+    p.textAlign(p.CENTER)
+    p.textSize(70)
+    p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[0].main.temp - 273.15)}°C`, 1425, 280);
+    p.textSize(40)
+    p.text(`Voelt aan als: ${Math.round(storageObject.OpenWeatherAPIData.list[0].main.feels_like - 273.15)}°C`, 1425, 330);
+    p.textAlign(p.LEFT);
+  }
     p.image(sunset, 1080, 400);
     p.image(sunrise, 1080, 600);
     p.image(humidity, 1420, 400);
@@ -222,51 +227,51 @@ function pagina1(p) {
   }
 
   function tweedaagse() {
-    if (firstCall) {
+    if(firstCall){
       p.fill("#393E46");
       p.rect(50, 500, 900, 400, 50);
       p.fill("#222831");
-      p.textSize(70);
-      p.text("2 dagen", 80, 570);
-    }
-    let { morgenDatum, overmorgenDatum } = updateDates();
-    p.fill("#222831");
-    p.rect(50, 500, 900, 400, 50);
-    p.fill("white");
-    p.textSize(30);
-    p.text(morgenDatum, 80, 620);
-    p.text(overmorgenDatum, 80, 700);
-
-    for (let i = 1; i < 3; i++) {
-      let x = 80 + i * 300;
-      p.image(icons[i], x + 5, 590, 90, 90);
+      p.rect(80, 580, 405, 300, 30);
+      p.rect(515, 580, 405, 300, 30);
+      p.fill("white");
+      p.textSize(60);
+      p.text("2-daagse verwachting", 80, 540);
       p.textSize(30);
-      p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[i].main.temp - 273.15)}°C`, x + 48, 720);
-      p.textAlign(p.CENTER);
-      p.textSize(25);
-      p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[i].wind.speed * 3600 / 1000)} km/h`, x + 50, 750);
-      p.push();
-      p.angleMode(p.DEGREES);
-      p.translate(x + 50, 720);
-      p.rotate(storageObject.OpenWeatherAPIData.list[i].wind.deg + 180);
-      p.imageMode(p.CENTER);
-      p.image(windrichting, 0, 0, 50, 50);
-      p.pop();
+      p.text("Morgen:", 100, 610);
+      p.text("Overmorgen:", 535, 610);
+      p.image(icons2, 80, 650, 200, 200);
+      p.image(icons2, 515, 650, 200, 200);
+      firstCall = false;
     }
+    
+    const { morgenDatum, overmorgenDatum } = updateDates();
+    p.text(morgenDatum, 100, 645);
+    p.text(overmorgenDatum, 535, 645);
+    
+    p.textSize(70);
+    p.text(`${temperature}°C`, 310, 775);
+    p.text(`${temperature}°C`, 745, 775);
   }
 
-  // Corrected function to apply mask
   function drawRoundedImage(img, x, y, w, h, r) {
-    // Create a mask
+    
     let mask = p.createGraphics(w, h);
-    mask.fill(255);  // White area will keep the image visible
+    mask.fill(255);
     mask.noStroke();
-    mask.rect(0, 0, w, h, r);  // Draw a rounded rectangle on the mask
-
-    // Apply the mask to the image
+    mask.rect(0, 0, w, h, r);
     img.mask(mask);
-
-    // Draw the image with the applied mask
     p.image(img, x, y, w, h);
   }
+
+  function roundedTime() {
+    let now = new Date();
+    let hours = now.getHours();
+    now.setMinutes(0, 0, 0);
+    if (now.getMinutes() > 30) {
+      now.setHours(hours + 1);
+    }
+    return now;
+  }
 }
+
+new p5(pagina1);
