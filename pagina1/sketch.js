@@ -12,6 +12,7 @@ let oldIcons = [];
 let clouds;
 let firstCall = true;
 let firstdraw = true;
+let mask;
 
   p.setup = function() {
     p.createCanvas(1890, 930);
@@ -259,7 +260,7 @@ let firstdraw = true;
 
   function drawRoundedImage(img, x, y, w, h, r) {
     
-    let mask = p.createGraphics(w, h);
+    mask = p.createGraphics(w, h);
     mask.fill(255);
     mask.noStroke();
     mask.rect(0, 0, w, h, r);
