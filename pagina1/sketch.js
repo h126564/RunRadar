@@ -253,10 +253,10 @@ function weervandaag() {
       p.text("Morgen:", 100, 610);
       p.text("Overmorgen:", 535, 610);
       const morgenIcon = p.loadImage(
-    `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather[0].icon}_t.png`
+    `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather.icon}_t.png`
   );
   const overmorgenIcon = p.loadImage(
-    `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather[0].icon}_t.png`
+    `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather.icon}_t.png`
   );
       p.image(morgenIcon, 80, 650, 200, 200);
       p.image(overmorgenIcon, 515, 650, 200, 200);
