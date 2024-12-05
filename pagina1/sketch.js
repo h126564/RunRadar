@@ -238,6 +238,9 @@ function weervandaag() {
 
 
   function tweedaagse() {
+    if ((!storageObject.hasBeenUpdated)) {
+      return;
+  }
       p.fill("#393E46");
       p.rect(50, 500, 900, 400, 50);
       p.fill("#222831");
