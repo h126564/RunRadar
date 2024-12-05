@@ -226,9 +226,9 @@ let mask;
     p.text('Zonsopkomst:', 1185, 620);
     p.text(storageObject.OpenWeatherAPIData.list[0].sys.sunrise, 1185, 665);
     p.text('Luchtvochtigheid:', 1525, 420);
-    p.text(storageObject.OpenWeatherAPIData.list[0].main.humidity + '%', 1525, 465);
+    p.text(storageObject.OpenWeatherAPIData.list[0].main.humidity + ' %', 1525, 465);
     p.text('Luchtdruk', 1525, 620);
-    p.text(storageObject.OpenWeatherAPIData.list[0].main.pressure + 'hPa', 1525, 665);
+    p.text(storageObject.OpenWeatherAPIData.list[0].main.pressure + ' hPa', 1525, 665);
   }
 
   function tweedaagse() {
