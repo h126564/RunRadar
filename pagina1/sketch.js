@@ -22,6 +22,7 @@ let mask;
       newIcons[i] = icons2;
       oldIcons[i] = icons2;
     }
+    mask = p.createGraphics(850, 850);
     
   }
 
@@ -260,7 +261,7 @@ let mask;
 
   function drawRoundedImage(img, x, y, w, h, r) {
     
-    mask = p.createGraphics(w, h);
+    
     mask.fill(255);
     mask.noStroke();
     mask.rect(0, 0, w, h, r);
