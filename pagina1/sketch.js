@@ -40,10 +40,6 @@ let mask;
       firstCall = true;
       storageObject.firstCall = false;
     }
-    if(storageObject1.firstCall){
-      firstCall = true;
-      storageObject1.firstCall = false;
-    }
     count++;
     if(count == 2){
       updateData();
@@ -182,7 +178,7 @@ let mask;
 }
 
 function weervandaag() {
-  if ((!storageObject.hasBeenUpdated && !storageObject1.hasBeenUpdated)) {
+  if ((!storageObject.hasBeenUpdated)) {
     return;
 }
     p.fill("#393E46AA");
@@ -201,7 +197,7 @@ function weervandaag() {
     let textSizeValue = 1;
     p.textSize(textSizeValue);
     while (
-        p.textWidth(storageObject1.OpenWeatherAPIDatanow.name) < rectWidth - 20 &&
+        p.textWidth(storageObject.OpenWeatherAPIDatanow.name) < rectWidth - 20 &&
         p.textAscent() + p.textDescent() < rectHeight - 20
     ) {
         textSizeValue++;
@@ -213,7 +209,7 @@ function weervandaag() {
     }
     p.textSize(textSizeValue);
     p.textAlign(p.CENTER, p.CENTER);
-    p.text(storageObject1.OpenWeatherAPIDatanow.name, -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
+    p.text(storageObject.OpenWeatherAPIDatanow.name, -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
     p.textAlign(p.CENTER);
     p.textSize(70);
     p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[0].main.temp - 273.15)}°C`, 1425, 280);
@@ -226,8 +222,8 @@ function weervandaag() {
     p.image(humidity, 1420, 400);
     p.image(pressure, 1420, 600);
 
-    const sunsetTime = formatUnixTime(storageObject1.OpenWeatherAPIDatanow.sys.sunset);
-    const sunriseTime = formatUnixTime(storageObject1.OpenWeatherAPIDatanow.sys.sunrise);
+    const sunsetTime = formatUnixTime(storageObject.OpenWeatherAPIDatanow.sys.sunset);
+    const sunriseTime = formatUnixTime(storageObject.OpenWeatherAPIDatanow.sys.sunrise);
 
     p.textSize(30);
     p.text('Zonsondergang:', 1185, 420);
