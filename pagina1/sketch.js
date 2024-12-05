@@ -3,8 +3,6 @@
 function pagina1(p) {
 let count = 0;
 let icons = [];
-let temperature = 6;
-let temperaturefeelslike = 2;
 let windrichting;
 let icons2;
 let newIcons = [];
@@ -252,15 +250,10 @@ function weervandaag() {
       p.textSize(30);
       p.text("Morgen:", 100, 610);
       p.text("Overmorgen:", 535, 610);
-      const morgenIcon = p.loadImage(
-    `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather.icon}_t.png`
-  );
-  const overmorgenIcon = p.loadImage(
-    `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather.icon}_t.png`
-  );
-      p.image(morgenIcon, 80, 650, 200, 200);
-      p.image(overmorgenIcon, 515, 650, 200, 200);
-    
+      if(firstCall{
+      p.image(icons[8], 80, 650, 200, 200);
+      p.image(Icons[16], 515, 650, 200, 200);
+  }
     const { morgenDatum, overmorgenDatum } = updateDates();
     
     p.textSize(30);
