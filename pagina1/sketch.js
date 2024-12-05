@@ -40,6 +40,10 @@ let mask;
       firstCall = true;
       storageObject.firstCall = false;
     }
+    if(storageObject1.firstCall){
+      firstCall = true;
+      storageObject1.firstCall = false;
+    }
     count++;
     if(count == 2){
       updateData();
