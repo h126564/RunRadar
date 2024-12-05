@@ -190,14 +190,6 @@ function weervandaag() {
     p.rectMode(p.CORNER);
     p.stroke("black");
     p.fill("white");
-
-    let String = storageObject.locationData.name;
-    let A = p.split(String, ','); 
-    let reverseA = p.reverse(A);
-    if (reverseA.length == 0) {
-        return;
-    }
-
     let rectX = 1425;
     let rectY = 150;
     let rectWidth = 500;
@@ -205,7 +197,7 @@ function weervandaag() {
     let textSizeValue = 1;
     p.textSize(textSizeValue);
     while (
-        p.textWidth(reverseA[3]) < rectWidth - 20 &&
+        p.textWidth(storageObject1.OpenWeatherAPIDatanow.name) < rectWidth - 20 &&
         p.textAscent() + p.textDescent() < rectHeight - 20
     ) {
         textSizeValue++;
@@ -217,7 +209,7 @@ function weervandaag() {
     }
     p.textSize(textSizeValue);
     p.textAlign(p.CENTER, p.CENTER);
-    p.text(reverseA[3], -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
+    p.text(storageObject1.OpenWeatherAPIDatanow.name, -250 + rectX + rectWidth / 2, -50 + rectY + rectHeight / 2);
     p.textAlign(p.CENTER);
     p.textSize(70);
     p.text(`${Math.round(storageObject.OpenWeatherAPIData.list[0].main.temp - 273.15)}°C`, 1425, 280);
