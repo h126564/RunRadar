@@ -178,7 +178,7 @@ let mask;
 }
 
 function weervandaag() {
-    if (!storageObject.hasBeenUpdated) {
+    if (!storageObject.hasBeenUpdated && !storageObject1.hasBeenUpdated) {
         return;
     }
     p.fill("#393E46AA");

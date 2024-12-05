@@ -8,7 +8,7 @@ let storageObject = {
     },
     MeteoweatherAPIData: {},
     OpenWeatherAPIData: {},
-    OpenWeatherAPIDatanow {},
+    OpenWeatherAPIData1: {},
 
 };
 const input = document.getElementById("locationfield");
@@ -85,7 +85,7 @@ function updateWeatherData(){
     .then(data => {
         storageObject.OpenWeatherAPIDatanow = data;
         console.log(storageObject.OpenWeatherAPIDatanow)
-        storageObject.hasBeenUpdated = true;
+        storageObject1.hasBeenUpdated = true;
     })
 
 
