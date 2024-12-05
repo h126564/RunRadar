@@ -169,6 +169,9 @@ let firstdraw = true;
   }
 
   function weervandaag() {
+    if(!storageObject.hasBeenUpdated){
+      return;
+    }
     p.fill("#393E46AA");
     drawRoundedImage(clouds, 1000, 50, 850, 850, 50);
     p.rectMode(p.CENTER);
