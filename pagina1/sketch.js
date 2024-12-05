@@ -231,7 +231,7 @@ function weervandaag() {
     p.image(pressure, 1420, 600);
 
     const sunsetTime = formatUnixTime(storageObject.OpenWeatherAPIData.list[0].sys.sunset);
-    const sunriseTime = formatUnixTime(storageObject.OpenWeatherAPIData.list[0].sys.sunrise);
+    const sunriseTime = formatUnixTime(1733384058);
 
     p.textSize(30);
     p.text('Zonsondergang:', 1185, 420);
@@ -240,7 +240,7 @@ function weervandaag() {
     p.text(sunriseTime, 1185, 665);
     p.text('Luchtvochtigheid:', 1525, 420);
     p.text(storageObject.OpenWeatherAPIData.list[0].main.humidity + ' %', 1525, 465);
-    p.text('Luchtdruk', 1525, 620);
+    p.text('Luchtdruk:', 1525, 620);
     p.text(storageObject.OpenWeatherAPIData.list[0].main.pressure + ' hPa', 1525, 665);
 }
 
