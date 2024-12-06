@@ -72,10 +72,10 @@ const onResult = function (result) {
     });
 
     // Create a marker for the start point:
-    const startMarker = new H.map.Marker(origin);
+    startMarker = new H.map.Marker(origin);
 
     // Create a marker for the end point:
-    const endMarker = new H.map.Marker(destination);
+    endMarker = new H.map.Marker(destination);
 
     // Create a H.map.Group to hold all the map objects and enable us to obtain
     // the bounding box that contains all its objects within
