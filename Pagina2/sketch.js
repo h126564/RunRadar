@@ -1,3 +1,21 @@
+let storageObject = {
+  hasUpdated: false,
+  locationData: {
+      lat: 0,
+      lon: 0,
+  },
+  RouteData: {
+    startLat: 0,
+    startLon: 0,
+    endLat: 0,
+    endLon: 0,
+  },
+  Meteo15MinuteData: {},
+  MeteoweatherAPIData: {},
+  OpenWeatherAPIData: {},
+  
+};
+
 const startInput = document.getElementById("startLocationField");
 const startSearchButton = document.getElementById("startSearchButton");
 const endInput = document.getElementById("endLocationField");
@@ -16,7 +34,18 @@ var map = new H.Map(
     {
       zoom: 10,
       center: { lat: 52.5, lng: 13.4 }
-    });
+});
+
+let routingParameters = {
+  routingMode: "fast",
+  transportMode: "bicycle",
+  // The start point of the route:
+  origin: `${storageObject.RouteData.startLat},${storageObject.RouteData.startLon}`,
+  // The end point of the route:
+  destination: `${storageObject.RouteData.endLat},${storageObject.RouteData.endLon}`,
+  // Include the route shape in the response
+  return: "polyline",
+};
 
 
 startSearchButton.onclick = function(){
@@ -26,23 +55,7 @@ endSearchButton.onclick = function(){
   updateLocation(endSearchButton.value, 1)
 }
 
-let storageObject = {
-  hasUpdated: false,
-  locationData: {
-      lat: 0,
-      lon: 0,
-  },
-  RouteData: {
-    startLat: 0,
-    startLon: 0,
-    endLat: 0,
-    endLon: 0,
-  },
-  Meteo15MinuteData: {},
-  MeteoweatherAPIData: {},
-  OpenWeatherAPIData: {},
-  
-};
+
 let apiResponse = {};
 function updateLocation(){
   // Define the API URL
