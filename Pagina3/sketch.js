@@ -97,7 +97,7 @@ function pagina3(p) {
     p.pop();
 
     // Display the best time
-    fill(#222831)
+    fill("#222831")
     rect(100, 550, 250, 300, 20)
     p.textAlign(p.LEFT);
     p.textSize(20);
