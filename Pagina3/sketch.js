@@ -113,9 +113,9 @@ function pagina3(p) {
   
     // Display the best time
     p.textAlign(p.LEFT);
-    p.textSize(30);
+    p.textSize(40);
     p.fill("white");
-    p.text(bestTimeText, 70, 850);
+    p.text(bestTimeText, 120, 700);
   }
   
 
