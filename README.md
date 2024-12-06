@@ -21,3 +21,4 @@ Wij gebruiken waar mogelijk (bv op pagina 1 per uur gedeelte en 2 daagse verwach
 
 Map rendering: https://platform.here.com/portal/
 map api for route: https://www.here.com/docs/bundle/maps-api-for-javascript-developer-guide/page/topics/routing.html 
+![alt text](image.png)
