@@ -47,6 +47,6 @@ nav a:hover{
 }
 #mapContainer{
     position: absolute;
-    left: 800;
+    left: 800px;
     top: 80px;
 }
