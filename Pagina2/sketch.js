@@ -16,6 +16,9 @@ let storageObject = {
   OpenWeatherAPIData: {},
   
 };
+let startMarker;
+let endMarker;
+
 
 const startInput = document.getElementById("startLocationField");
 const startSearchButton = document.getElementById("startSearchButton");
@@ -153,9 +156,18 @@ function updateLocation(locationName, startOrEnd){
       if(startOrEnd == 0){
         storageObject.RouteData.startLat = apiResponse.lat;
         storageObject.RouteData.startLon = apiResponse.lon;
+        if(startMarker.isEmpty()){
+          startMarker = new H.map.Marker({lat: apiResponse.lat, lng: apiResponse.lon});
+          map.addObject(startMarker)
+        }
+        
       }else if (startOrEnd == 1){
         storageObject.RouteData.endLat = apiResponse.lat;
         storageObject.RouteData.endLon = apiResponse.lon;
+        if(endMarker.isEmpty()){
+          endMarker = new H.map.Marker({lat: apiResponse.lat, lng: apiResponse.lon});
+          map.addObject(endMarker)
+        }
       }
       storageObject.RouteData.isNew=true;
   })
