@@ -90,10 +90,10 @@ const onResult = function (result) {
 const router = platform.getRoutingService(null, 8);
 
 startSearchButton.onclick = function(){
-  updateLocation(startSearchButton.value, 0);
+  updateLocation(startInput.value, 0);
 }
 endSearchButton.onclick = function(){
-  updateLocation(endSearchButton.value, 1)
+  updateLocation(endInput.value, 1)
 }
 
 
