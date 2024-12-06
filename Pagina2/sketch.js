@@ -16,8 +16,8 @@ let storageObject = {
   OpenWeatherAPIData: {},
   
 };
-let startMarker;
-let endMarker;
+let startMarker = {};
+let endMarker = {};
 
 
 const startInput = document.getElementById("startLocationField");
@@ -39,7 +39,7 @@ var map = new H.Map(
       zoom: 10,
       center: { lat: 52.5, lng: 13.4 }
 });
-
+var ui = H.ui.UI.createDefault(map, defaultLayers);
 let routingParameters = {
   routingMode: "fast",
   transportMode: "bicycle",
