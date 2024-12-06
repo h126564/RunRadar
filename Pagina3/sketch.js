@@ -23,7 +23,7 @@ function pagina3(p) {
     }
   
     p.fill("#222831");
-    p.rect(100, 200, 800, 100, 20); 
+    p.rect(100, 200, 750, 100, 20); 
     p.fill('white');
     p.textSize(30);
     p.text(`Geselecteerde tijd: ${selectedTime1} - ${selectedTime2}`, 120, 250);
@@ -40,7 +40,7 @@ function pagina3(p) {
   
     // Create first dropdown menu for the first time
     timeDropdown1 = p.createSelect();
-    timeDropdown1.position(200, 250); // Position it on the canvas
+    timeDropdown1.position(233, 220); // Position it on the canvas
     timeDropdown1.style('font-size', '20px'); // Style the dropdown
     for (let hour = 0; hour < 24; hour++) {
       let time = `${hour.toString().padStart(2, '0')}:00`; // Format time as HH:00
@@ -50,7 +50,7 @@ function pagina3(p) {
   
     // Create second dropdown menu for the second time
     timeDropdown2 = p.createSelect();
-    timeDropdown2.position(400, 250); // Position it on the canvas
+    timeDropdown2.position(467, 250); // Position it on the canvas
     timeDropdown2.style('font-size', '20px'); // Style the dropdown
     for (let hour = 0; hour < 24; hour++) {
       let time = `${hour.toString().padStart(2, '0')}:00`; // Format time as HH:00
