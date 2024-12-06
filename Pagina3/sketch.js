@@ -102,7 +102,7 @@ function pagina3(p) {
     p.fill("#222831")
     p.rect(100, 550, 250, 300, 20)
     p.textAlign(p.LEFT);
-    p.textSize(30);
+    p.textSize(20);
     p.fill("white");
     p.text(bestTimeText, 120, 700);
     } else if(besttimeload = false){
