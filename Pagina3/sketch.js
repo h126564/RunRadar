@@ -85,8 +85,8 @@ function pagina3(p) {
     if (icons) p.image(icons, 420, 550, 150, 150);
     p.textAlign(p.CENTER);
     p.fill("white");
-    p.text(`${temperature}°C`, 510, 750);
-    p.text(`${windsnelheid} km/h`, 730, 750);
+    p.text(`${Math.round(temperature)}°C`, 510, 750);
+    p.text(`${Math.round(windsnelheid)} km/h`, 730, 750);
 
     p.push();
     p.angleMode(p.DEGREES);
@@ -97,10 +97,12 @@ function pagina3(p) {
     p.pop();
 
     // Display the best time
+    fill(#222831)
+    rect(100, 550, 250, 300, 20)
     p.textAlign(p.LEFT);
     p.textSize(20);
     p.fill("white");
-    p.text(bestTimeText, 70, 850);
+    p.text(bestTimeText, 100, 700);
   }
 
   async function fetchWeatherData() {
@@ -125,7 +127,7 @@ function pagina3(p) {
     const endTime = parseInt(selectedTime2.split(":")[0]);
 
     if (isNaN(startTime) || isNaN(endTime) || startTime >= endTime) {
-      bestTimeText = "Invalid time range.";
+      bestTimeText = "Ongeldige time range";
       return;
     }
 
