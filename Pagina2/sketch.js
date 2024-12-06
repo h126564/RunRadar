@@ -20,7 +20,7 @@ let storageObject = {
     startLat: 0,
     startLon: 0,
     endLat: 0,
-    startLon: 0,
+    endLon: 0,
   },
   Meteo15MinuteData: {},
   MeteoweatherAPIData: {},
@@ -77,11 +77,12 @@ function updateLocation(locationName, startOrEnd){
       }
       apiResponse=data[0];
       if(startOrEnd == 0){
-
+        storageObject.RouteData.startLat = apiResponse.lat;
+        storageObject.RouteData.startLon = apiResponse.lon;
+      }else if (startOrEnd == 1){
+        storageObject.RouteData.endLat = apiResponse.lat;
+        storageObject.RouteData.endLon = apiResponse.lon;
       }
-      storageObject.locationData.lat = apiResponse.lat;
-      storageObject.locationData.lon = apiResponse.lon;
-      updateWeatherData(storageObject.locationData.lon, storageObject.locationData.lat);
   })
   .catch(error => {
       console.error('Error:', error);

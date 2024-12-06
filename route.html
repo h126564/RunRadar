@@ -2,9 +2,6 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="route.css">
-    <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8FjsOQFtE8QtiEGuFdz_FML_2_j2b5ko&loading=async&libraries=places&callback=initMap">
-</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
     <meta charset="utf-8" />
@@ -23,6 +20,21 @@
 
       </div>
     </header>
+    
+    <div id="StartDiv">
+      <input type="text" id="startLocationField" name="location" placeholder="Locatie">
+      <button id="startSearchButton">
+        <img src="src/search.png" alt="Search Icon" width="20px" height="20px">
+      </button>
+    </div>
+    <div id="EndDiv">
+      <input type="text" id="endLocationField" name="location" placeholder="Locatie">
+      <button id="endSearchButton">
+        <img src="src/search.png" alt="Search Icon" width="20px" height="20px">
+      </button>
+    </div>
+
+
     <main>
         <script src="Pagina2/sketch.js"></script>
     </main>
