@@ -134,6 +134,7 @@ function pagina3(p) {
 
     if (isNaN(startTime) || isNaN(endTime) || startTime >= endTime) {
       bestTimeText = "Ongeldige time range";
+      besttimeload = false
       return;
     }
 
