@@ -8,6 +8,7 @@ function pagina3(p) {
   let selectedTime2 = "00:00";
   let weatherData;
   let bestTimeText = "Loading...";
+  besttimeload = false
 
   p.setup = function () {
     p.createCanvas(1890, 972);
@@ -80,29 +81,15 @@ function pagina3(p) {
   function bestetijd() {
     p.fill("#393E46");
     p.rect(50, 500, 850, 400, 50);
+    if(besttimeload = true){
     p.fill("#222831");
     p.rect(400, 550, 450, 300, 20);
-  
-    // Check if valid times are selected
-    const startTime = parseInt(selectedTime1.split(":")[0]);
-    const endTime = parseInt(selectedTime2.split(":")[0]);
-  
-    if (isNaN(startTime) || isNaN(endTime) || startTime >= endTime) {
-      // Display message to select times
-      p.textAlign(p.CENTER);
-      p.fill("white");
-      p.textSize(30);
-      p.text("Vul eerst twee geldige tijden in", 475, 750);
-      return;
-    }
-  
-    // Display weather details and best time
     if (icons) p.image(icons, 420, 550, 150, 150);
     p.textAlign(p.CENTER);
     p.fill("white");
     p.text(`${Math.round(temperature)}°C`, 510, 750);
     p.text(`${Math.round(windsnelheid)} km/h`, 730, 750);
-  
+
     p.push();
     p.angleMode(p.DEGREES);
     p.translate(720, 630);
@@ -110,14 +97,16 @@ function pagina3(p) {
     p.imageMode(p.CENTER);
     p.image(windrichting, 0, 0, 100, 100);
     p.pop();
-  
+
     // Display the best time
+    p.fill("#222831")
+    p.rect(100, 550, 250, 300, 20)
     p.textAlign(p.LEFT);
-    p.textSize(40);
+    p.textSize(50);
     p.fill("white");
     p.text(bestTimeText, 120, 700);
+    }
   }
-  
 
   async function fetchWeatherData() {
     try {
@@ -134,6 +123,7 @@ function pagina3(p) {
   function findBestTime() {
     if (!weatherData) {
       bestTimeText = "Weather data not loaded yet.";
+      besttimeload = false
       return;
     }
 
@@ -167,6 +157,7 @@ function pagina3(p) {
     if (bestForecast) {
       const bestTime = new Date(bestForecast.dt * 1000);
       bestTimeText = `Beste tijd: ${bestTime.getHours()}:00`;
+      besttimeload = true
       temperature = bestForecast.main.temp;
       windsnelheid = bestForecast.wind.speed;
       icons = p.loadImage(
@@ -175,6 +166,7 @@ function pagina3(p) {
       windgraden = bestForecast.wind.deg;
     } else {
       bestTimeText = "Geen geschikte tijd gevonden.";
+      besttimeload = true
     }
   }
 }
