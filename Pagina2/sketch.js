@@ -9,6 +9,7 @@ let storageObject = {
     startLon: 0,
     endLat: 0,
     endLon: 0,
+    isNew: false,
   },
   Meteo15MinuteData: {},
   MeteoweatherAPIData: {},
@@ -47,6 +48,46 @@ let routingParameters = {
   return: "polyline",
 };
 
+const onResult = function (result) {
+  // Ensure that at least one route was found
+  if (result.routes.length) {
+    const lineStrings = [];
+    result.routes[0].sections.forEach((section) => {
+      // Create a linestring to use as a point source for the route line
+      lineStrings.push(H.geo.LineString.fromFlexiblePolyline(section.polyline));
+    });
+
+    // Create an instance of H.geo.MultiLineString
+    const multiLineString = new H.geo.MultiLineString(lineStrings);
+
+    // Create a polyline to display the route:
+    const routeLine = new H.map.Polyline(multiLineString, {
+      style: {
+        strokeColor: "blue",
+        lineWidth: 3,
+      },
+    });
+
+    // Create a marker for the start point:
+    const startMarker = new H.map.Marker(origin);
+
+    // Create a marker for the end point:
+    const endMarker = new H.map.Marker(destination);
+
+    // Create a H.map.Group to hold all the map objects and enable us to obtain
+    // the bounding box that contains all its objects within
+    const group = new H.map.Group();
+    group.addObjects([routeLine, startMarker, endMarker]);
+    // Add the group to the map
+    map.addObject(group);
+
+    // Set the map viewport to make the entire route visible:
+    map.getViewModel().setLookAtData({
+      bounds: group.getBoundingBox(),
+    });
+  }
+};
+const router = platform.getRoutingService(null, 8);
 
 startSearchButton.onclick = function(){
   updateLocation(startSearchButton.value, 0);
@@ -112,6 +153,7 @@ function updateLocation(locationName, startOrEnd){
         storageObject.RouteData.endLat = apiResponse.lat;
         storageObject.RouteData.endLon = apiResponse.lon;
       }
+      storageObject.RouteData.isNew=true;
   })
   .catch(error => {
       console.error('Error:', error);
@@ -187,10 +229,42 @@ function pagina2(p) {
   }
 
   p.draw = function() {
+    mapUpdate();
     p.translate(0, p.height * 0.05); 
     zoekscherm();
     kaart();
     weeroproute();
+  }
+
+
+  function mapUpdate(){
+    if(storageObject.RouteData.isNew){
+      storageObject.RouteData.isNew=false;
+      if((storageObject.RouteData.startLat == 0 && storageObject.RouteData.startLon ==0) || (storageObject.RouteData.endLat ==0 && storageObject.RouteData.endLon ==0)){
+        storageObject.RouteData.isNew=true;
+        return;
+      }
+
+    }else{
+      return;
+    }
+
+    routingParameters = {
+      routingMode: "fast",
+      transportMode: "bicycle",
+      // The start point of the route:
+      origin: `${storageObject.RouteData.startLat},${storageObject.RouteData.startLon}`,
+      // The end point of the route:
+      destination: `${storageObject.RouteData.endLat},${storageObject.RouteData.endLon}`,
+      // Include the route shape in the response
+      return: "polyline",
+    };
+    router.calculateRoute(routingParameters, onResult, function (error) {
+      alert(error.message);
+    });
+    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+    
+    
   }
 
   function zoekscherm() {
