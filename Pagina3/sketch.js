@@ -170,7 +170,6 @@ function pagina3(p) {
       windgraden = bestForecast.wind.deg;
     } else {
       bestTimeText = "Geen geschikte tijd gevonden.";
-      besttimeload = true
     }
   }
 }
