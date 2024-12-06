@@ -40,7 +40,7 @@ function pagina3(p) {
   
     // Create first dropdown menu for the first time
     timeDropdown1 = p.createSelect();
-    timeDropdown1.position(233, 220); // Position it on the canvas
+    timeDropdown1.position(333, 220); // Position it on the canvas
     timeDropdown1.style('font-size', '20px'); // Style the dropdown
     for (let hour = 0; hour < 24; hour++) {
       let time = `${hour.toString().padStart(2, '0')}:00`; // Format time as HH:00
@@ -50,7 +50,7 @@ function pagina3(p) {
   
     // Create second dropdown menu for the second time
     timeDropdown2 = p.createSelect();
-    timeDropdown2.position(467, 250); // Position it on the canvas
+    timeDropdown2.position(567, 220); // Position it on the canvas
     timeDropdown2.style('font-size', '20px'); // Style the dropdown
     for (let hour = 0; hour < 24; hour++) {
       let time = `${hour.toString().padStart(2, '0')}:00`; // Format time as HH:00
