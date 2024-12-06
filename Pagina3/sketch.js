@@ -2,6 +2,7 @@ function pagina3(p) {
   let icons;
   let temperature = 6;
   let windsnelheid = 21;
+  let timeDropdown1, timeDropdown2;
 
   p.setup = function() {
     p.createCanvas(1890, 972);
@@ -25,7 +26,25 @@ function pagina3(p) {
     p.rect(50, 50, 850, 400, 50);
     p.fill('white');
     p.textSize(50);
-    p.text("wat is het beste weer tussen:", 70, 100);
+    p.text("Wat is het beste weer tussen:", 70, 100);
+  
+    // Create first dropdown menu for the first time
+    timeDropdown1 = p.createSelect();
+    timeDropdown1.position(100, 150); // Position it on the canvas
+    timeDropdown1.style('font-size', '20px'); // Style the dropdown
+    for (let hour = 0; hour < 24; hour++) {
+      let time = `${hour.toString().padStart(2, '0')}:00`; // Format time as HH:00
+      timeDropdown1.option(time);
+    }
+  
+    // Create second dropdown menu for the second time
+    timeDropdown2 = p.createSelect();
+    timeDropdown2.position(300, 150); // Position it on the canvas
+    timeDropdown2.style('font-size', '20px'); // Style the dropdown
+    for (let hour = 0; hour < 24; hour++) {
+      let time = `${hour.toString().padStart(2, '0')}:00`; // Format time as HH:00
+      timeDropdown2.option(time);
+    }
   }
 
   function kaart() {
