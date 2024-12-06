@@ -43,7 +43,7 @@ function pagina3(p) {
 
     // First dropdown menu
     timeDropdown1 = p.createSelect();
-    timeDropdown1.position(233, 220);
+    timeDropdown1.position(333, 220);
     timeDropdown1.style("font-size", "20px");
     for (let hour = 0; hour < 24; hour++) {
       let time = `${hour.toString().padStart(2, "0")}:00`;
@@ -53,7 +53,7 @@ function pagina3(p) {
 
     // Second dropdown menu
     timeDropdown2 = p.createSelect();
-    timeDropdown2.position(467, 250);
+    timeDropdown2.position(567, 220);
     timeDropdown2.style("font-size", "20px");
     for (let hour = 0; hour < 24; hour++) {
       let time = `${hour.toString().padStart(2, "0")}:00`;
