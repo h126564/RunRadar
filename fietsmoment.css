@@ -35,6 +35,14 @@ nav a:hover{
     color:#212121;
 }
 
+#searchDiv{
+    position: relative;
+    top: -57px;
+    float:right;
+    line-height: 10%;
+    right:-35%;
+}
+
 #locationfield{
     padding:8px;
     border: 2px solid #474747;
