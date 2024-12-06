@@ -34,3 +34,15 @@ nav a{
 nav a:hover{
     color:#212121;
 }
+
+#StartDiv{
+    position:absolute;
+    top:100px;
+    left:100px;
+  }
+  #EndDiv{
+    position: absolute;
+    top: 100px;
+    left: 300px;
+  }
+  
