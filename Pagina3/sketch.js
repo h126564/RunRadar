@@ -82,12 +82,27 @@ function pagina3(p) {
     p.rect(50, 500, 850, 400, 50);
     p.fill("#222831");
     p.rect(400, 550, 450, 300, 20);
+  
+    // Check if valid times are selected
+    const startTime = parseInt(selectedTime1.split(":")[0]);
+    const endTime = parseInt(selectedTime2.split(":")[0]);
+  
+    if (isNaN(startTime) || isNaN(endTime) || startTime >= endTime) {
+      // Display message to select times
+      p.textAlign(p.CENTER);
+      p.fill("white");
+      p.textSize(30);
+      p.text("Vul eerst twee geldige tijden in", 475, 750);
+      return;
+    }
+  
+    // Display weather details and best time
     if (icons) p.image(icons, 420, 550, 150, 150);
     p.textAlign(p.CENTER);
     p.fill("white");
     p.text(`${Math.round(temperature)}°C`, 510, 750);
     p.text(`${Math.round(windsnelheid)} km/h`, 730, 750);
-
+  
     p.push();
     p.angleMode(p.DEGREES);
     p.translate(720, 630);
@@ -95,15 +110,14 @@ function pagina3(p) {
     p.imageMode(p.CENTER);
     p.image(windrichting, 0, 0, 100, 100);
     p.pop();
-
+  
     // Display the best time
-    p.fill("#222831")
-    p.rect(100, 550, 250, 300, 20)
     p.textAlign(p.LEFT);
-    p.textSize(20);
+    p.textSize(30);
     p.fill("white");
-    p.text(bestTimeText, 100, 700);
+    p.text(bestTimeText, 70, 850);
   }
+  
 
   async function fetchWeatherData() {
     try {
