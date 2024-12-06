@@ -81,8 +81,6 @@ function pagina3(p) {
   function bestetijd() {
     p.fill("#393E46");
     p.rect(50, 500, 850, 400, 50);
-    p.fill('white')
-    p.text('Vul eerst twee tijden in', 120, 700)
     if(besttimeload = true){
     p.fill("#222831");
     p.rect(400, 550, 450, 300, 20);
@@ -107,6 +105,9 @@ function pagina3(p) {
     p.textSize(30);
     p.fill("white");
     p.text(bestTimeText, 120, 700);
+    } else if(besttimeload = false){
+      p.fill('white')
+      p.text('Vul eerst twee tijden in', 120, 700)
     }
   }
 
