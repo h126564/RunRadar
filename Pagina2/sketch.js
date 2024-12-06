@@ -156,7 +156,7 @@ function updateLocation(locationName, startOrEnd){
       if(startOrEnd == 0){
         storageObject.RouteData.startLat = apiResponse.lat;
         storageObject.RouteData.startLon = apiResponse.lon;
-        if(startMarker.isEmpty()){
+        if( _.isEmpty(startMarker)){
           startMarker = new H.map.Marker({lat: apiResponse.lat, lng: apiResponse.lon});
           map.addObject(startMarker)
         }
@@ -164,7 +164,7 @@ function updateLocation(locationName, startOrEnd){
       }else if (startOrEnd == 1){
         storageObject.RouteData.endLat = apiResponse.lat;
         storageObject.RouteData.endLon = apiResponse.lon;
-        if(endMarker.isEmpty()){
+        if(_.isEmpty(endMarker)){
           endMarker = new H.map.Marker({lat: apiResponse.lat, lng: apiResponse.lon});
           map.addObject(endMarker)
         }
