@@ -143,7 +143,11 @@ function updateLocation(locationName, startOrEnd){
   .then(data => {
       if(data.length == 0){
           alert("Locatie niet gevonden");
+          console.log(apiUrl)
+          console.log(response.json())
           throw new Error('Parameter is not a location!');
+          
+
       }
       apiResponse=data[0];
       if(startOrEnd == 0){
