@@ -1,7 +1,7 @@
 function pagina3(p) {
   let icons;
-  let temperature = 6;
-  let windsnelheid = 21;
+  let temperature = 0
+  let windsnelheid = 0
   let windgraden = 0;
   let timeDropdown1, timeDropdown2;
   let selectedTime1 = "00:00";
