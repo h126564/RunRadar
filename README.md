@@ -20,3 +20,4 @@ wij gebruiken de apis, stoppen deze in een global object waardoor wij niet in ve
 Wij gebruiken waar mogelijk (bv op pagina 1 per uur gedeelte en 2 daagse verwachting) lazy rendering ipv per frame rendering
 
 Map rendering: https://platform.here.com/portal/
+map api for route: https://www.here.com/docs/bundle/maps-api-for-javascript-developer-guide/page/topics/routing.html 

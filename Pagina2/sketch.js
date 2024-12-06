@@ -3,6 +3,22 @@ const startSearchButton = document.getElementById("startSearchButton");
 const endInput = document.getElementById("endLocationField");
 const endSearchButton = document.getElementById("endSearchButton");
 
+var platform = new H.service.Platform({
+  'apikey': '-bJgWNtBmfKXtY55Bd2tEZQdK8yU76wQhoI9Vy_NBZk'
+});
+// Obtain the default map types from the platform object:
+var defaultLayers = platform.createDefaultLayers();
+
+// Instantiate (and display) a map object:
+var map = new H.Map(
+    document.getElementById('mapContainer'),
+    defaultLayers.vector.normal.map,
+    {
+      zoom: 10,
+      center: { lat: 52.5, lng: 13.4 }
+    });
+
+
 startSearchButton.onclick = function(){
   updateLocation(startSearchButton.value, 0);
 }
