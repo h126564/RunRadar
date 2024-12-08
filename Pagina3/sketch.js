@@ -11,7 +11,7 @@ function pagina3(p) {
   besttimeload = false
 
   p.setup = function () {
-    p.createCanvas(1890, 960);
+    p.createCanvas(1890, 950);
     p.background("#222831");
     fetchWeatherData();
   };
