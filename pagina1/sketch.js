@@ -90,6 +90,12 @@ let mask;
         newIcons[i] = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
         icons[i] = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
       }
+      morgenImage = p.loadImage(
+        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather[0].icon}_t.png`
+      );
+      overmorgenImage = p.loadImage(
+        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather[0].icon}_t.png`
+      );
       return;
     }
     for (let i = 0; i < 7; i++) {
@@ -250,12 +256,6 @@ function weervandaag() {
       p.textSize(30);
       p.text("Morgen:", 100, 610);
       p.text("Overmorgen:", 535, 610);
-      morgenImage = p.loadImage(
-        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather[0].icon}_t.png`
-      );
-      overmorgenImage = p.loadImage(
-        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather[0].icon}_t.png`
-      );
      p.image(morgenImage, 80, 650, 200, 200);
      p.image(overmorgenImage, 515, 650, 200, 200);
 
