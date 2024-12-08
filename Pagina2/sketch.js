@@ -1,8 +1,8 @@
 let storageObject = {
   hasUpdated: false,
   locationData: {
-      lat: 0,
-      lon: 0,
+    lat: 0,
+    lon: 0,
   },
   RouteData: {
     startLat: 0,
@@ -14,174 +14,110 @@ let storageObject = {
   Meteo15MinuteData: {},
   MeteoweatherAPIData: {},
   OpenWeatherAPIData: {},
-  
 };
-let startMarker = {};
-let endMarker = {};
+let averageData = {
+  temperature_2m: [0],
+  weather_code: [0],
+  wind_speed_10m: [0],
+  wind_direction_10m: [0],
+  rain: [0]
+};
+let averageDataNotNull = false;
+class GeoLocation {
+  constructor(lon, lat) {
+    this.lon = lon;
+    this.lat = lat;
+  }
+}
 
-
+let heightMap = [];
+let map = [];
 const startInput = document.getElementById("startLocationField");
 const startSearchButton = document.getElementById("startSearchButton");
 const endInput = document.getElementById("endLocationField");
 const endSearchButton = document.getElementById("endSearchButton");
 
-var platform = new H.service.Platform({
-  'apikey': '-bJgWNtBmfKXtY55Bd2tEZQdK8yU76wQhoI9Vy_NBZk'
-});
-// Obtain the default map types from the platform object:
-const defaultLayers = platform.createDefaultLayers();
-
-// Instantiate (and display) a map object:
-var map = new H.Map(
-    document.getElementById('mapContainer'),
-    defaultLayers.vector.normal.map,
-    {
-      zoom: 10,
-      center: { lat: 52.5, lng: 13.4 }
-});
-var ui = H.ui.UI.createDefault(map, defaultLayers);
-let routingParameters = {
-  routingMode: "fast",
-  transportMode: "bicycle",
-  // The start point of the route:
-  origin: `${storageObject.RouteData.startLat},${storageObject.RouteData.startLon}`,
-  // The end point of the route:
-  destination: `${storageObject.RouteData.endLat},${storageObject.RouteData.endLon}`,
-  // Include the route shape in the response
-  return: "polyline",
-};
-
-const onResult = function (result) {
-  // Ensure that at least one route was found
-  if (result.routes.length) {
-    const lineStrings = [];
-    result.routes[0].sections.forEach((section) => {
-      // Create a linestring to use as a point source for the route line
-      lineStrings.push(H.geo.LineString.fromFlexiblePolyline(section.polyline));
-    });
-
-    // Create an instance of H.geo.MultiLineString
-    const multiLineString = new H.geo.MultiLineString(lineStrings);
-
-    // Create a polyline to display the route:
-    const routeLine = new H.map.Polyline(multiLineString, {
-      style: {
-        strokeColor: "blue",
-        lineWidth: 3,
-      },
-    });
-
-    // Create a marker for the start point:
-    startMarker = new H.map.Marker(origin);
-
-    // Create a marker for the end point:
-    endMarker = new H.map.Marker(destination);
-
-    // Create a H.map.Group to hold all the map objects and enable us to obtain
-    // the bounding box that contains all its objects within
-    const group = new H.map.Group();
-    group.addObjects([routeLine, startMarker, endMarker]);
-    // Add the group to the map
-    map.addObject(group);
-
-    // Set the map viewport to make the entire route visible:
-    map.getViewModel().setLookAtData({
-      bounds: group.getBoundingBox(),
-    });
-  }
-};
-const router = platform.getRoutingService(null, 8);
-
-startSearchButton.onclick = function(){
+startSearchButton.onclick = function () {
   updateLocation(startInput.value, 0);
-}
-endSearchButton.onclick = function(){
-  updateLocation(endInput.value, 1)
-}
-
+};
+endSearchButton.onclick = function () {
+  updateLocation(endInput.value, 1);
+};
 
 let apiResponse = {};
-function updateLocation(){
+function updateLocation() {
   // Define the API URL
-  
-  const apiUrl = 'https://geocode.maps.co/search?q=' +  "Helinium"  + '&api_key=67346201ecee5360511634fte9d92c5';
+
+  const apiUrl =
+    "https://geocode.maps.co/search?q=" +
+    "Helinium" +
+    "&api_key=67346201ecee5360511634fte9d92c5";
 
   // Make a GET request
   fetch(apiUrl)
-  .then(response => {
+    .then((response) => {
       if (!response.ok) {
-          throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       return response.json();
-  })
-  .then(data => {
-      if(data.length == 0){
-          alert("Locatie niet gevonden");
-          throw new Error('Parameter is not a location!');
+    })
+    .then((data) => {
+      if (data.length == 0) {
+        alert("Locatie niet gevonden");
+        throw new Error("Parameter is not a location!");
       }
-      apiResponse=data[0];
+      apiResponse = data[0];
       storageObject.locationData.lat = apiResponse.lat;
       storageObject.locationData.lon = apiResponse.lon;
-      updateWeatherData(storageObject.locationData.lon, storageObject.locationData.lat);
-  })
-  .catch(error => {
-      console.error('Error:', error);
-  });
+      updateWeatherData(
+        storageObject.locationData.lon,
+        storageObject.locationData.lat
+      );
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
 
-};
-
-function updateLocation(locationName, startOrEnd){
+function updateLocation(locationName, startOrEnd) {
   // Define the API URL
-  
-  const apiUrl = 'https://geocode.maps.co/search?q=' +  locationName  + '&api_key=67346201ecee5360511634fte9d92c5';
+
+  const apiUrl =
+    "https://geocode.maps.co/search?q=" +
+    locationName +
+    "&api_key=67346201ecee5360511634fte9d92c5";
 
   // Make a GET request
   fetch(apiUrl)
-  .then(response => {
+    .then((response) => {
       if (!response.ok) {
-          throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       return response.json();
-  })
-  .then(data => {
-      if(data.length == 0){
-          alert("Locatie niet gevonden");
-          console.log(apiUrl)
-          console.log(response.json())
-          throw new Error('Parameter is not a location!');
-          
-
+    })
+    .then((data) => {
+      if (data.length == 0) {
+        alert("Locatie niet gevonden");
+        throw new Error("Parameter is not a location!");
       }
-      apiResponse=data[0];
-      if(startOrEnd == 0){
+      apiResponse = data[0];
+      if (startOrEnd == 0) {
         storageObject.RouteData.startLat = apiResponse.lat;
         storageObject.RouteData.startLon = apiResponse.lon;
-        if( _.isEmpty(startMarker)){
-          startMarker = new H.map.Marker({lat: apiResponse.lat, lng: apiResponse.lon});
-          map.addObject(startMarker)
-        }
-        
-      }else if (startOrEnd == 1){
+      } else if (startOrEnd == 1) {
         storageObject.RouteData.endLat = apiResponse.lat;
         storageObject.RouteData.endLon = apiResponse.lon;
-        if(_.isEmpty(endMarker)){
-          endMarker = new H.map.Marker({lat: apiResponse.lat, lng: apiResponse.lon});
-          map.addObject(endMarker)
-        }
       }
-      storageObject.RouteData.isNew=true;
-  })
-  .catch(error => {
-      console.error('Error:', error);
-  });
+      storageObject.RouteData.isNew = true;
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
 
-};
-
-
-
-function updateWeatherData(lon, lat ){
-  if(Object.keys(storageObject.locationData).length === 0){
-      throw new Error('No location data stored');
+function updateWeatherData(lon, lat) {
+  if (Object.keys(storageObject.locationData).length === 0) {
+    throw new Error("No location data stored");
   }
   //make open meteo calls
   /*
@@ -197,20 +133,24 @@ function updateWeatherData(lon, lat ){
       console.log(storageObject.MeteoweatherAPIData)
   })
       */
-  const openMeteo15ApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude='+ lon + '&minutely_15=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&forecast_minutely_15=24';
-  fetch(openMeteo15ApiUrl).then(response=> {
-      if(!response.ok){
-          throw new Error('Openmeteo niet te bereiken')
+  const openMeteo15ApiUrl =
+    "https://api.open-meteo.com/v1/forecast?latitude=" +
+    lat +
+    "&longitude=" +
+    lon +
+    "&minutely_15=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&forecast_minutely_15=24";
+  fetch(openMeteo15ApiUrl)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Openmeteo niet te bereiken");
       }
       return response.json();
-  })
-  .then(data => {
+    })
+    .then((data) => {
       storageObject.Meteo15MinuteData = data;
       storageObject.hasUpdated = true;
-      console.log(storageObject.Meteo15MinuteData)
-  })
-
-  
+      console.log(storageObject.Meteo15MinuteData);
+    });
 
   /*const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=c147b5c83a42fbf37236c537fb83e881';
   fetch(openWeatherApiUrl).then(response=> {
@@ -225,61 +165,128 @@ function updateWeatherData(lon, lat ){
       
   })
 */
-  
 }
 
 function pagina2(p) {
   let icons = [];
-  let windgraden = 230;
-  let windsnelheid = 21;
   let windrichting;
 
-  p.setup = function() {
+  p.setup = function () {
     p.createCanvas(1890, 930);
     p.background("#222831");
     updateData();
-  }
+  };
 
-  p.preload = function() {
+  p.preload = function () {
     windrichting = p.loadImage("Pagina2/direction.png");
-  }
+  };
 
-  p.draw = function() {
+  p.draw = function () {
     mapUpdate();
-    p.translate(0, p.height * 0.05); 
+    p.translate(0, p.height * 0.05);
     zoekscherm();
     kaart();
     weeroproute();
-  }
+  };
 
-
-  function mapUpdate(){
-    if(storageObject.RouteData.isNew){
-      storageObject.RouteData.isNew=false;
-      if((storageObject.RouteData.startLat == 0 && storageObject.RouteData.startLon ==0) || (storageObject.RouteData.endLat ==0 && storageObject.RouteData.endLon ==0)){
-        storageObject.RouteData.isNew=true;
-        return;
-      }
-
-    }else{
+  function mapUpdate() {
+    if (!storageObject.RouteData.isNew) {
       return;
     }
 
-    routingParameters = {
-      routingMode: "fast",
-      transportMode: "bicycle",
-      // The start point of the route:
-      origin: `${storageObject.RouteData.startLat},${storageObject.RouteData.startLon}`,
-      // The end point of the route:
-      destination: `${storageObject.RouteData.endLat},${storageObject.RouteData.endLon}`,
-      // Include the route shape in the response
-      return: "polyline",
-    };
-    router.calculateRoute(routingParameters, onResult, function (error) {
-      alert(error.message);
-    });
-    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-    
+    storageObject.RouteData.isNew = false;
+    if (
+      (storageObject.RouteData.startLat == 0 &&
+        storageObject.RouteData.startLon == 0) ||
+      (storageObject.RouteData.endLat == 0 &&
+        storageObject.RouteData.endLon == 0)
+    ) {
+      storageObject.RouteData.isNew = true;
+      return;
+    }
+
+    let listLocation = [5];
+    listLocation[0] = new GeoLocation(
+      storageObject.RouteData.startLon,
+      storageObject.RouteData.startLat
+    );
+    listLocation[4] = new GeoLocation(
+      storageObject.RouteData.endLon,
+      storageObject.RouteData.endLat
+    );
+
+    listLocation[1] = new GeoLocation(
+      +storageObject.RouteData.startLon + (+storageObject.RouteData.startLon - +storageObject.RouteData.endLon )/ 3,
+      +storageObject.RouteData.startLat + (+storageObject.RouteData.startLat - +storageObject.RouteData.endLat) / 3
+    );
+    listLocation[2] = new GeoLocation(
+      +storageObject.RouteData.startLon + (+storageObject.RouteData.startLon - +storageObject.RouteData.endLon) / 2,
+      +storageObject.RouteData.startLat + (+storageObject.RouteData.startLat - +storageObject.RouteData.endLat )/ 2
+    );
+    listLocation[3] = new GeoLocation(
+      +storageObject.RouteData.startLon + (+storageObject.RouteData.startLon - +storageObject.RouteData.endLon) / 1.5,
+      +storageObject.RouteData.startLat + (+storageObject.RouteData.startLat - +storageObject.RouteData.endLat ) / 1.5
+    );
+
+    for (let i = 0; i < 5; i++) {
+      const openMeteo15ApiUrl =
+        "https://api.open-meteo.com/v1/forecast?latitude=" +
+        listLocation[i].lat +
+        "&longitude=" +
+        listLocation[i].lon +
+        "&minutely_15=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,rain&forecast_minutely_15=24";
+
+      fetch(openMeteo15ApiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            console.log(response);
+            throw new Error("Openmeteo niet te bereiken");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          
+          map[i] = data.minutely_15;
+          console.log(map[i]);
+        });
+    }
+    //while (map[5] == undefined) {}
+    setTimeout(() => {
+      averageData.temperature_2m = Array(24).fill(0);
+      averageData.weather_code = Array(24).fill(0);
+      averageData.wind_speed_10m = Array(24).fill(0);
+      averageData.wind_direction_10m = Array(24).fill(0);
+      averageData.rain = Array(24).fill(0);
+      
+      for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 24; j++) {
+          averageData.temperature_2m[j] =
+            +averageData.temperature_2m[j] + +map[i].temperature_2m[j];
+          averageData.weather_code[j] =
+            +averageData.weather_code[j] + +map[i].weather_code[j];
+          averageData.wind_speed_10m[j] =
+            +averageData.wind_speed_10m[j] + +map[i].wind_speed_10m[j];
+          averageData.wind_direction_10m[j] = 
+          +averageData.wind_direction_10m[j] + +map[i].wind_direction_10m[j];
+          averageData.rain[j] = 
+          +averageData.rain[j] + +map[i].rain[j];
+        }
+      }
+      for (let i = 0; i < 24; i++) {
+        averageData.temperature_2m[i] = +averageData.temperature_2m[i] / 5;
+        averageData.weather_code[i] = +averageData.weather_code[i] / 5;
+        averageData.wind_speed_10m[i] = +averageData.wind_speed_10m[i] / 5;
+        averageData.rain[i] = +averageData.rain[i] / 5;
+        while(averageData.wind_direction_10m[i] > 360){
+          averageData.wind_direction_10m[i] = +averageData.wind_direction_10m[i] - 360;
+        }
+      }
+  
+      console.log("average weather:");
+      console.log(averageData);
+      averageDataNotNull = true;
+      heightMap = averageData.rain;
+  }, 1000);
     
   }
 
@@ -294,13 +301,24 @@ function pagina2(p) {
   }
 
   function kaart() {
+    p.push()
     p.fill("#393E46");
     p.rect(1150, 50, 700, 400, 50);
+    p.translate(1150, 50)
+    for(let i = 0; i < heightMap.length; i++){
+      p.fill("blue")
+      p.rect(50 + i * 25,0, 10, heightMap[i]*100)
+    }
+    
+
+    p.pop();
   }
 
+  
+
   function weeroproute() {
-    p.push()
-    p.translate(0, -30); 
+    p.push();
+    p.translate(0, -30);
     p.fill("#393E46");
     p.rect(50, 500, 1800, 400, 50);
 
@@ -313,8 +331,8 @@ function pagina2(p) {
     p.fill("#222831");
 
     for (let i = 0; i < 13; i++) {
-      if(!storageObject.hasUpdated){
-        p.pop()
+      if (!averageDataNotNull) {
+        p.pop();
         return;
       }
       let x = 116 + i * 130;
@@ -326,25 +344,42 @@ function pagina2(p) {
       p.fill("white");
       p.textSize(30);
       p.text(formattedTime, x + 48, 650);
-      p.text(`${Math.round(storageObject.Meteo15MinuteData.minutely_15.temperature_2m[i])}°C`, x + 48, 735);
+      p.text(
+        `${Math.round(
+          +averageData.temperature_2m[i]
+        )}°C`,
+        x + 48,
+        735
+      );
       p.textSize(25);
-      p.text(`${Math.round(storageObject.Meteo15MinuteData.minutely_15.wind_speed_10m[i])} km/h`, x + 48, 840);
+      p.text(
+        `${Math.round(
+          +averageData.wind_speed_10m[i]
+        )} km/h`,
+        x + 48,
+        840
+      );
       p.image(icons[i], x + 5, 635, 90, 90);
 
       p.push();
       p.angleMode(p.DEGREES);
       p.translate(x + 50, 775);
-      p.rotate(storageObject.Meteo15MinuteData.minutely_15.wind_direction_10m[i]+180);
+      p.rotate(
+        averageData.wind_direction_10m[i]
+      );
       p.imageMode(p.CENTER);
       p.image(windrichting, 0, 0, 50, 50);
       p.pop();
 
+      
       currentTime.setMinutes(currentTime.getMinutes() + 15);
       p.fill("#222831");
     }
-
-    p.textAlign(p.LEFT);
+    p.push();
+    p.translate(200, 500)
     p.pop()
+    p.textAlign(p.LEFT);
+    p.pop();
   }
 
   function updateData() {
