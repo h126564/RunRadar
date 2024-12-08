@@ -307,7 +307,7 @@ function pagina2(p) {
     p.translate(1150, 50)
     for(let i = 0; i < heightMap.length; i++){
       p.fill("blue")
-      p.rect(50 + i * 25,0, 10, heightMap[i]*100)
+      p.rect(50 + i * 25,5, 10, heightMap[i]*75)
     }
     
 
