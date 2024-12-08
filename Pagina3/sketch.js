@@ -11,7 +11,7 @@ function pagina3(p) {
   besttimeload = false
 
   p.setup = function () {
-    p.createCanvas(1890, 972);
+    p.createCanvas(1890, 940);
     p.background("#222831");
     fetchWeatherData();
   };
@@ -21,7 +21,7 @@ function pagina3(p) {
   };
 
   p.draw = function () {
-    p.translate(0, p.height * 0.05);
+    p.translate(0, p.height * 0.04);
     if (!timeDropdown1 && !timeDropdown2) {
       zoekscherm();
     }
