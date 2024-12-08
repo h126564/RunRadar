@@ -11,6 +11,8 @@ let clouds;
 let firstCall = true;
 let firstdraw = true;
 let mask;
+let morgenImage
+let overmorgenImage
 
   p.setup = function() {
     p.createCanvas(1890, 930);
