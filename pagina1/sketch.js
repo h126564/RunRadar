@@ -27,6 +27,12 @@ let overmorgenImage
   }
 
   p.preload = function() {
+    morgenImage = p.loadImage(
+      `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather[0].icon}_t.png`
+    );
+    overmorgenImage = p.loadImage(
+      `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather[0].icon}_t.png`
+    );
     windrichting = p.loadImage("pagina1/direction.png");
     clouds = p.loadImage("pagina1/clouds.jpg");
     sunset = p.loadImage("pagina1/sunset.png");
@@ -92,12 +98,7 @@ let overmorgenImage
         newIcons[i] = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
         icons[i] = p.loadImage(`https://rodrigokamada.github.io/openweathermap/images/${weatherIconCode}_t.png`);
       }
-      morgenImage = p.loadImage(
-        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather[0].icon}_t.png`
-      );
-      overmorgenImage = p.loadImage(
-        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather[0].icon}_t.png`
-      );
+      
       return;
     }
     for (let i = 0; i < 7; i++) {
@@ -244,9 +245,9 @@ function weervandaag() {
 
 
   function tweedaagse() {
-    if ((!storageObject.hasBeenUpdated)) {
+    if (!storageObject.hasBeenUpdated) {
       return;
-  }
+    }
       p.fill("#393E46");
       p.rect(50, 500, 900, 400, 50);
       p.fill("#222831");
