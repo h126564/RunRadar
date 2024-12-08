@@ -1,15 +1,56 @@
+let apiLink =
+  "https://api.openweathermap.org/data/2.5/forecast?lat=51.826&lon=4.118&appid=c147b5c83a42fbf37236c537fb83e881&units=metric";
+
 function pagina3(p) {
+  let lat = 0;
+  let lon = 0;
   let icons;
-  let temperature = 0
-  let windsnelheid = 0
+  let temperature = 0;
+  let windsnelheid = 0;
+  let windrichting= 0;
   let windgraden = 0;
   let timeDropdown1, timeDropdown2;
   let selectedTime1 = "00:00";
   let selectedTime2 = "00:00";
   let weatherData;
   let bestTimeText = "Loading...";
-  besttimeload = false
+  besttimeload = false;
 
+  const inputField = document.getElementById("locationfield");
+  const buttonInput = document.getElementById("searchButton");
+  buttonInput.onclick = function () {
+    // Define the API URL
+    const apiUrl =
+      "https://geocode.maps.co/search?q=" +
+      inputField.value +
+      "&api_key=67346201ecee5360511634fte9d92c5";
+
+    // Make a GET request
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.length === 0) {
+          alert("Locatie niet gevonden");
+          throw new Error("Parameter is not a location!");
+        }
+        let apiResponse = data[0];
+        lat = apiResponse.lat;
+        lon = apiResponse.lon;
+        apiLink = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon="+ lon+  "&appid=c147b5c83a42fbf37236c537fb83e881&units=metric"
+        fetchWeatherData()
+        
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+      
+  };
   p.setup = function () {
     p.createCanvas(1890, 940);
     p.background("#222831");
@@ -18,8 +59,19 @@ function pagina3(p) {
 
   p.preload = function () {
     windrichting = p.loadImage("Pagina3/direction.png");
+    koud = p.loadImage("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXdwZjd1ZGdzdjJ6dnU4ZzFnaTc5N2UwNjNkeDBya2xuYm5ib3QwayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KFUx0Rtz7p0HTzbJ7x/giphy.webp");
+    mid = p.loadImage("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZThzZGRvemx4MXRoYTVhbzMwOHdiNTZ6dnZtd2xrbXoxNmlhdW9jOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/E2d2tsgz7iHo4/giphy.webp");
+    hot = p.loadImage("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXE1cHl5NmV4bHNsMG1raHVseDc5bG10bmN0NmxxajE0YzFvMDJzOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/etn52ENYVnpxqMaXiT/giphy.webp");
   };
-
+  function updateGif(){
+    if(temperature < 1){
+      p.image(koud, 1070, 130, 710, 700)
+    }else if (temperature < 20){
+      p.image(mid, 1070, 130, 710, 700)
+    }else{
+      p.image(hot, 1070, 130, 710, 700)
+    }
+  }
   p.draw = function () {
     p.translate(0, p.height * 0.04);
     if (!timeDropdown1 && !timeDropdown2) {
@@ -33,6 +85,12 @@ function pagina3(p) {
     p.text(`Geselecteerde tijd: ${selectedTime1} - ${selectedTime2}`, 120, 250);
     kaart();
     bestetijd();
+    if(windrichting == 0&&temperature ==0){
+
+    }else{
+      updateGif();
+    }
+    
   };
 
   function zoekscherm() {
@@ -81,41 +139,39 @@ function pagina3(p) {
   function bestetijd() {
     p.fill("#393E46");
     p.rect(50, 500, 850, 400, 50);
-    if(besttimeload = true){
-    p.fill("#222831");
-    p.rect(400, 550, 450, 300, 20);
-    if (icons) p.image(icons, 420, 550, 150, 150);
-    p.textAlign(p.CENTER);
-    p.fill("white");
-    p.text(`${Math.round(temperature)}°C`, 510, 750);
-    p.text(`${Math.round(windsnelheid)} km/h`, 730, 750);
+    if ((besttimeload = true)) {
+      p.fill("#222831");
+      p.rect(400, 550, 450, 300, 20);
+      if (icons) p.image(icons, 420, 550, 150, 150);
+      p.textAlign(p.CENTER);
+      p.fill("white");
+      p.text(`${Math.round(temperature)}°C`, 510, 750);
+      p.text(`${Math.round(windsnelheid)} km/h`, 730, 750);
 
-    p.push();
-    p.angleMode(p.DEGREES);
-    p.translate(720, 630);
-    p.rotate(windgraden);
-    p.imageMode(p.CENTER);
-    p.image(windrichting, 0, 0, 100, 100);
-    p.pop();
+      p.push();
+      p.angleMode(p.DEGREES);
+      p.translate(720, 630);
+      p.rotate(windgraden);
+      p.imageMode(p.CENTER);
+      p.image(windrichting, 0, 0, 100, 100);
+      p.pop();
 
-    // Display the best time
-    p.fill("#222831")
-    p.rect(100, 550, 250, 300, 20)
-    p.textAlign(p.LEFT);
-    p.textSize(20);
-    p.fill("white");
-    p.text(bestTimeText, 120, 700);
-    } else if(besttimeload = false){
-      p.fill('white')
-      p.text('Vul eerst twee tijden in', 120, 700)
+      // Display the best time
+      p.fill("#222831");
+      p.rect(100, 550, 250, 300, 20);
+      p.textAlign(p.LEFT);
+      p.textSize(20);
+      p.fill("white");
+      p.text(bestTimeText, 120, 700);
+    } else if ((besttimeload = false)) {
+      p.fill("white");
+      p.text("Vul eerst twee tijden in", 120, 700);
     }
   }
 
   async function fetchWeatherData() {
     try {
-      const response = await fetch(
-        "https://api.openweathermap.org/data/2.5/forecast?lat=51.826&lon=4.118&appid=c147b5c83a42fbf37236c537fb83e881&units=metric"
-      );
+      const response = await fetch(apiLink);
       weatherData = await response.json();
       findBestTime();
     } catch (error) {
@@ -126,7 +182,7 @@ function pagina3(p) {
   function findBestTime() {
     if (!weatherData) {
       bestTimeText = "Weather data not loaded yet.";
-      besttimeload = false
+      besttimeload = false;
       return;
     }
 
@@ -135,7 +191,7 @@ function pagina3(p) {
 
     if (isNaN(startTime) || isNaN(endTime) || startTime >= endTime) {
       bestTimeText = "Ongeldige time range";
-      besttimeload = false
+      besttimeload = false;
       return;
     }
 
@@ -148,7 +204,8 @@ function pagina3(p) {
 
       if (hour >= startTime && hour <= endTime) {
         const score =
-          forecast.main.temp - Math.abs(forecast.wind.speed) +
+          forecast.main.temp -
+          Math.abs(forecast.wind.speed) +
           (forecast.weather[0].main === "Clear" ? 10 : 0);
 
         if (score < bestConditions) {
@@ -161,7 +218,7 @@ function pagina3(p) {
     if (bestForecast) {
       const bestTime = new Date(bestForecast.dt * 1000);
       bestTimeText = `Beste tijd: ${bestTime.getHours()}:00`;
-      besttimeload = true
+      besttimeload = true;
       temperature = bestForecast.main.temp;
       windsnelheid = bestForecast.wind.speed;
       icons = p.loadImage(
@@ -171,6 +228,7 @@ function pagina3(p) {
     } else {
       bestTimeText = "Geen geschikte tijd gevonden.";
     }
+    
   }
 }
 
