@@ -305,6 +305,14 @@ function pagina2(p) {
     p.fill("#393E46");
     p.rect(1150, 50, 700, 400, 50);
     p.translate(1150, 50)
+    let num = 0;
+    for(let i = 0; i < heightMap.length; i++){
+      num = num + heightMap[i]
+    }
+    if(num < 2){
+      p.fill("black")
+      p.text("Geen Regen Verwacht", 45, 200)
+    }
     for(let i = 0; i < heightMap.length; i++){
       p.fill("blue")
       p.rect(50 + i * 25,5, 10, heightMap[i]*75)
