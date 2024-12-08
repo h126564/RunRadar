@@ -250,8 +250,14 @@ function weervandaag() {
       p.textSize(30);
       p.text("Morgen:", 100, 610);
       p.text("Overmorgen:", 535, 610);
-     // p.image(icons[8], 80, 650, 200, 200);
-      //p.image(Icons[16], 515, 650, 200, 200);
+      morgenImage = p.loadImage(
+        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather[0].icon}_t.png`
+      );
+      overmorgenImage = p.loadImage(
+        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather[0].icon}_t.png`
+      );
+     p.image(morgenImage, 80, 650, 200, 200);
+     p.image(overmorgenImage, 515, 650, 200, 200);
 
     const { morgenDatum, overmorgenDatum } = updateDates();
     
