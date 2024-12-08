@@ -60,7 +60,7 @@ function pagina3(p) {
   p.preload = function () {
     windrichting = p.loadImage("Pagina3/direction.png");
     koud = p.loadImage("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXdwZjd1ZGdzdjJ6dnU4ZzFnaTc5N2UwNjNkeDBya2xuYm5ib3QwayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KFUx0Rtz7p0HTzbJ7x/giphy.webp");
-    mid = p.loadImage("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZThzZGRvemx4MXRoYTVhbzMwOHdiNTZ6dnZtd2xrbXoxNmlhdW9jOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/E2d2tsgz7iHo4/giphy.webp");
+    mid = p.loadImage("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTk3YWpsNTM2NWJkazNtbGcxN3Q5bnZpNG5ibTZ1Z2c4eWs5dmo1ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EP0jHSIAOQxK7omlea/giphy.webp");
     hot = p.loadImage("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXE1cHl5NmV4bHNsMG1raHVseDc5bG10bmN0NmxxajE0YzFvMDJzOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/etn52ENYVnpxqMaXiT/giphy.webp");
   };
   function updateGif(){
