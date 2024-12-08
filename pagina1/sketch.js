@@ -13,7 +13,7 @@ let firstdraw = true;
 let mask;
 let morgenImage
 let overmorgenImage
-
+let for2day = false;
   p.setup = function() {
     p.createCanvas(1890, 930);
     p.background("#222831");
@@ -27,12 +27,6 @@ let overmorgenImage
   }
 
   p.preload = function() {
-    morgenImage = p.loadImage(
-      `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather[0].icon}_t.png`
-    );
-    overmorgenImage = p.loadImage(
-      `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather[0].icon}_t.png`
-    );
     windrichting = p.loadImage("pagina1/direction.png");
     clouds = p.loadImage("pagina1/clouds.jpg");
     sunset = p.loadImage("pagina1/sunset.png");
@@ -247,6 +241,14 @@ function weervandaag() {
   function tweedaagse() {
     if (!storageObject.hasBeenUpdated) {
       return;
+    }else if(!for2day){
+      morgenImage = p.loadImage(
+        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[8].weather[0].icon}_t.png`
+      );
+      overmorgenImage = p.loadImage(
+        `https://rodrigokamada.github.io/openweathermap/images/${storageObject.OpenWeatherAPIData.list[16].weather[0].icon}_t.png`
+      );
+      for2day = true;
     }
       p.fill("#393E46");
       p.rect(50, 500, 900, 400, 50);
