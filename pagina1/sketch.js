@@ -13,7 +13,7 @@ let firstdraw = true;
 let mask;
 let morgenImage
 let overmorgenImage
-let for2day = false;
+let for2day = true;
   p.setup = function() {
     p.createCanvas(1890, 930);
     p.background("#222831");
@@ -39,6 +39,11 @@ let for2day = false;
     if(storageObject.firstCall){
       firstCall = true;
       storageObject.firstCall = false;
+      if(morgenImage == null){
+        for2day = false;
+      }
+      setTimeout(function() { for2day = false; }, 400);
+      
     }
     count++;
     if(count == 2){
